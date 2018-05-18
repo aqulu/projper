@@ -18,11 +18,39 @@ android {
     }
 }
 
+final androidSupportVersion = '27.1.1'
+final daggerVersion = '2.16'
+final rxAndroidVersion = '2.0.2'
+final retrofitVersion = '2.4.0'
+final okhttpVersion = '3.10.0'
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+
+    implementation "com.android.support:appcompat-v7:${androidSupportVersion}"
+
+    implementation "com.google.dagger:dagger-android:${daggerVersion}"
+    implementation "com.google.dagger:dagger-android-support:${daggerVersion}"
+    implementation "com.google.dagger:dagger:${daggerVersion}"
+    compileOnly 'javax.annotation:jsr250-api:1.0'
+
+    annotationProcessor "com.google.dagger:dagger-android-processor:${daggerVersion}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
+
+    implementation "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}"
+    implementation "com.squareup.okhttp3:okhttp:${okhttpVersion}"
+
+    implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
+
+    implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+
+
     testImplementation 'junit:junit:4.12'
+    androidTestImplementation "com.android.support.test:rules:1.0.2"
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
