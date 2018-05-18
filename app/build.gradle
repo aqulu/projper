@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
+
     defaultConfig {
         applicationId "lu.aqu.projper"
         minSdkVersion 16
@@ -10,11 +11,25 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
+        debug {
+            minifyEnabled false
+            shrinkResources false
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            if (!hasReleaseProperties) {
+                throw new RuntimeException("Please add properties/release.properties file")
+            }
         }
+    }
+
+    buildTypes.each {
+        it.buildConfigField "String", "BASE_URL", baseUrl
     }
 
     compileOptions {
