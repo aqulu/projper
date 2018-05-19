@@ -11,7 +11,7 @@ import lu.aqu.projper.api.endpoint.ProjectService;
 import lu.aqu.projper.model.Project;
 import lu.aqu.projper.mvp.RxPresenter;
 
-public class HomePresenter extends RxPresenter<HomeActivity> {
+public class HomePresenter extends RxPresenter<HomeContract.View> implements HomeContract.Presenter {
 
     @Inject
     ProjectService projectService;
@@ -23,13 +23,15 @@ public class HomePresenter extends RxPresenter<HomeActivity> {
 
     @SuppressLint("CheckResult")
     @Override
-    public void onViewAdded(HomeActivity homeActivity) {
-        super.onViewAdded(homeActivity);
+    public void onViewAdded(HomeContract.View view) {
+        super.onViewAdded(view);
+
         projectService.list()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(collectDispoable())
                 .subscribe(projects -> {
+                    view.showModel(projects);
                     for (Project project : projects) {
                         Log.d("home", project.getName());
                     }
