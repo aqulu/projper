@@ -16,6 +16,7 @@ android {
         debug {
             minifyEnabled false
             shrinkResources false
+            buildConfigField "String", "BASE_URL", debugBaseUrl
         }
 
         release {
@@ -24,12 +25,10 @@ android {
 
             if (!hasReleaseProperties) {
                 throw new RuntimeException("Please add properties/release.properties file")
+            } else {
+                buildConfigField "String", "BASE_URL", baseUrl
             }
         }
-    }
-
-    buildTypes.each {
-        it.buildConfigField "String", "BASE_URL", baseUrl
     }
 
     compileOptions {
