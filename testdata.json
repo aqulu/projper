@@ -1,0 +1,36 @@
+[
+	{
+		"id": 1,
+		"name": "project helper",
+		"description": "platform to share project ideas, helping other programmers to create something interesting while - for example - learning a new programming language.",
+		"tags": [
+			"web",
+			"api",
+			"CRUD",
+			"mobile"
+		]
+	},
+	{
+		"id": 2,
+		"name": "habit enforcer",
+		"description": "a simple, self-hostable and privacy protecting service that sends push notifications to a mobile device, to remind the user of their goals / habits",
+		"tags": [
+			"api",
+			"selfhosted",
+			"android",
+			"mobile",
+			"thirdparty services",
+			"firebase"
+		]
+	},
+	{
+		"id": 3,
+		"name": "how to be a hero online",
+		"description": "a platform supporting players in a game of www.howtobeahero.de tabletop rpg system",
+		"tags": [
+			"web",
+			"api",
+			"mobile"
+		]
+	}
+]
