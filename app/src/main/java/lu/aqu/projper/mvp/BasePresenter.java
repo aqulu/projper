@@ -1,6 +1,6 @@
 package lu.aqu.projper.mvp;
 
-public interface Presenter<T extends BaseView> {
+public interface BasePresenter<T extends BaseView> {
 
     void onViewAdded(T view);
 

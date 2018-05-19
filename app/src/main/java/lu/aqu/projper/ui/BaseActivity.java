@@ -7,9 +7,9 @@ import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 import lu.aqu.projper.mvp.BaseView;
-import lu.aqu.projper.mvp.Presenter;
+import lu.aqu.projper.mvp.BasePresenter;
 
-public abstract class BaseActivity<T extends Presenter> extends AppCompatActivity implements BaseView {
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements BaseView {
 
     @Inject
     T presenter;
