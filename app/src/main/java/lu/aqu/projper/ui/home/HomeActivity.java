@@ -13,7 +13,7 @@ import lu.aqu.projper.databinding.ActivityHomeBinding;
 import lu.aqu.projper.model.Project;
 import lu.aqu.projper.ui.BaseActivity;
 import lu.aqu.projper.ui.component.SpacerItemDecoration;
-import lu.aqu.projper.ui.home.adapter.ProjectAdapter;
+import lu.aqu.projper.ui.home.adapter.ProjectsAdapter;
 
 public class HomeActivity extends BaseActivity<HomePresenter> implements HomeContract.View {
 
@@ -26,7 +26,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
     SpacerItemDecoration itemDecoration;
 
     @Inject
-    ProjectAdapter projectAdapter;
+    ProjectsAdapter projectsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +36,9 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
 
     @Override
     public void showModel(List<Project> projects) {
-        binding.projects.setAdapter(projectAdapter);
+        binding.projects.setAdapter(projectsAdapter);
         binding.projects.setLayoutManager(linearLayoutManager);
         binding.projects.addItemDecoration(itemDecoration);
-        projectAdapter.setProjects(projects);
+        projectsAdapter.setProjects(projects);
     }
 }

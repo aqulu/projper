@@ -16,12 +16,12 @@ import lu.aqu.projper.R;
 import lu.aqu.projper.databinding.ProjectCardBinding;
 import lu.aqu.projper.model.Project;
 
-public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHolder> {
+public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHolder> {
 
     private final List<Project> projects = new ArrayList<>();
 
     @Inject
-    public ProjectAdapter() {
+    public ProjectsAdapter() {
     }
 
     @NonNull
