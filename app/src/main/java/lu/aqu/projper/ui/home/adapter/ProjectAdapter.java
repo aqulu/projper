@@ -1,4 +1,4 @@
-package lu.aqu.projper.ui.home.component;
+package lu.aqu.projper.ui.home.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
