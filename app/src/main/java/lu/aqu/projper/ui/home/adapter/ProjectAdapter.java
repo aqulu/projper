@@ -10,16 +10,18 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import lu.aqu.projper.R;
 import lu.aqu.projper.databinding.ProjectCardBinding;
 import lu.aqu.projper.model.Project;
 
 public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHolder> {
 
-    private final List<Project> projects;
+    private final List<Project> projects = new ArrayList<>();
 
-    public ProjectAdapter(List<Project> projects) {
-        this.projects = projects != null ? projects : new ArrayList<>();
+    @Inject
+    public ProjectAdapter() {
     }
 
     @NonNull
@@ -32,14 +34,25 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final Project project = projects.get(position);
-        if (project != null) {
-            holder.dataBinding.setProject(project);
-        }
+        holder.dataBinding.setProject(project);
     }
 
     @Override
     public int getItemCount() {
         return projects.size();
+    }
+
+    /**
+     * clears the previously held data and adds the supplied data
+     *
+     * @param projects projects to display
+     */
+    public void setProjects(List<Project> projects) {
+        if (projects != null) {
+            this.projects.clear();
+            this.projects.addAll(projects);
+            notifyDataSetChanged();
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

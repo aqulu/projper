@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import lu.aqu.projper.R;
 import lu.aqu.projper.databinding.ActivityHomeBinding;
 import lu.aqu.projper.model.Project;
@@ -17,6 +19,15 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
 
     private ActivityHomeBinding binding;
 
+    @Inject
+    LinearLayoutManager linearLayoutManager;
+
+    @Inject
+    SpacerItemDecoration itemDecoration;
+
+    @Inject
+    ProjectAdapter projectAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
@@ -25,8 +36,9 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
 
     @Override
     public void showModel(List<Project> projects) {
-        binding.projects.setAdapter(new ProjectAdapter(projects));
-        binding.projects.setLayoutManager(new LinearLayoutManager(this));
-        binding.projects.addItemDecoration(new SpacerItemDecoration(this, SpacerItemDecoration.VERTICAL, R.dimen.item_spacing));
+        binding.projects.setAdapter(projectAdapter);
+        binding.projects.setLayoutManager(linearLayoutManager);
+        binding.projects.addItemDecoration(itemDecoration);
+        projectAdapter.setProjects(projects);
     }
 }
