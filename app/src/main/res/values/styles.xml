@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Tag">
+        <item name="android:background">@drawable/tag_background</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 </resources>
