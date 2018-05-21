@@ -40,4 +40,8 @@ public class HomePresenter extends RxPresenter<HomeContract.View> implements Hom
                 }, throwable -> Log.d("home", "a-oh"));
     }
 
+    @Override
+    public void onProjectClicked(Project project) {
+        getView().showMessage(project.getName() + " has been clicked");
+    }
 }
