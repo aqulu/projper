@@ -22,11 +22,11 @@ import lu.aqu.projper.ui.component.SpacerItemDecoration;
 public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHolder> {
 
     private final List<Project> projects = new ArrayList<>();
-    private final OnClickCallback callback;
+    private final ProjectClickCallback callback;
     private Context context = null;
 
     @Inject
-    public ProjectsAdapter(OnClickCallback callback) {
+    public ProjectsAdapter(ProjectClickCallback callback) {
         this.callback = callback;
     }
 
@@ -46,7 +46,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
             holder.dataBinding.setCallback(callback);
             holder.dataBinding.tags.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
             holder.dataBinding.tags.addItemDecoration(new SpacerItemDecoration(context, SpacerItemDecoration.HORIZONTAL, R.dimen.space_sm));
-            holder.dataBinding.tags.setAdapter(new TagsAdapter(project.getTags()));
+            holder.dataBinding.tags.setAdapter(new TagsAdapter(project.getTags(), callback::onTagClick));
         }
     }
 
@@ -78,8 +78,9 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
         }
     }
 
-
-    public interface OnClickCallback {
+    public interface ProjectClickCallback {
         void onClick(Project project);
+
+        void onTagClick(String tag);
     }
 }

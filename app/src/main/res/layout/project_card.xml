@@ -10,7 +10,7 @@
 
         <variable
             name="callback"
-            type="lu.aqu.projper.ui.home.adapter.ProjectsAdapter.OnClickCallback" />
+            type="lu.aqu.projper.ui.home.adapter.ProjectsAdapter.ProjectClickCallback" />
 
     </data>
 

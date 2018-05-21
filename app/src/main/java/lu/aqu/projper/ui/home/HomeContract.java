@@ -16,6 +16,8 @@ public interface HomeContract {
 
     interface Presenter extends BasePresenter<View> {
         void onProjectClicked(Project project);
+
+        void onTagClicked(String tag);
     }
 
 }
