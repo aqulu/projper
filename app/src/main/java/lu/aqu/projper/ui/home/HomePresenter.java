@@ -10,7 +10,9 @@ import io.reactivex.schedulers.Schedulers;
 import lu.aqu.projper.api.endpoint.ProjectService;
 import lu.aqu.projper.model.Project;
 import lu.aqu.projper.mvp.RxPresenter;
+import lu.aqu.projper.ui.ActivityScope;
 
+@ActivityScope
 public class HomePresenter extends RxPresenter<HomeContract.View> implements HomeContract.Presenter {
 
     @Inject
@@ -35,9 +37,16 @@ public class HomePresenter extends RxPresenter<HomeContract.View> implements Hom
                     for (Project project : projects) {
                         Log.d("home", project.getName());
                     }
-                }, throwable -> {
-                    Log.d("home", "a-oh");
-                });
+                }, throwable -> Log.d("home", "a-oh"));
     }
 
+    @Override
+    public void onProjectClicked(Project project) {
+        getView().showMessage(project.getName() + " has been clicked");
+    }
+
+    @Override
+    public void onTagClicked(String tag) {
+        getView().showMessage("tag " + tag + " has been clicked");
+    }
 }

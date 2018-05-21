@@ -10,10 +10,14 @@ public interface HomeContract {
 
     interface View extends BaseView {
         void showModel(List<Project> model);
+
+        void showMessage(String message);
     }
 
     interface Presenter extends BasePresenter<View> {
+        void onProjectClicked(Project project);
 
+        void onTagClicked(String tag);
     }
 
 }

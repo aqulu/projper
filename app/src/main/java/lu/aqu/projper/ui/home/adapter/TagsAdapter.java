@@ -16,9 +16,11 @@ import lu.aqu.projper.databinding.TagItemBinding;
 public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.ViewHolder> {
 
     private final List<String> tags;
+    private final TagClickCallback callback;
 
-    public TagsAdapter(List<String> tags) {
+    public TagsAdapter(List<String> tags, TagClickCallback callback) {
         this.tags = tags != null ? tags : new ArrayList<>();
+        this.callback = callback;
     }
 
     @NonNull
@@ -32,6 +34,7 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (holder.dataBinding != null) {
             holder.dataBinding.setTag(tags.get(position));
+            holder.dataBinding.setCallback(callback);
         }
     }
 
@@ -48,5 +51,9 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.ViewHolder> {
             super(itemView);
             dataBinding = DataBindingUtil.bind(itemView);
         }
+    }
+
+    public interface TagClickCallback {
+        void onClick(String tag);
     }
 }

@@ -2,6 +2,7 @@ package lu.aqu.projper.ui.home;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import lu.aqu.projper.ui.BaseActivity;
 import lu.aqu.projper.ui.component.SpacerItemDecoration;
 import lu.aqu.projper.ui.home.adapter.ProjectsAdapter;
 
-public class HomeActivity extends BaseActivity<HomePresenter> implements HomeContract.View {
+public class HomeActivity extends BaseActivity<HomeContract.Presenter> implements HomeContract.View {
 
     private ActivityHomeBinding binding;
 
@@ -40,5 +41,10 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
         binding.projects.setLayoutManager(linearLayoutManager);
         binding.projects.addItemDecoration(itemDecoration);
         projectsAdapter.setProjects(projects);
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Snackbar.make(binding.container, message, Snackbar.LENGTH_LONG).show();
     }
 }

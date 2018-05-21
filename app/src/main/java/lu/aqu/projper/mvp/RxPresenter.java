@@ -13,6 +13,11 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
     }
 
     @Override
+    public T getView() {
+        return view;
+    }
+
+    @Override
     public void onViewAdded(T view) {
         this.view = view;
     }

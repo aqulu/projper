@@ -7,12 +7,17 @@
             name="tag"
             type="String" />
 
+        <variable
+            name="callback"
+            type="lu.aqu.projper.ui.home.adapter.TagsAdapter.TagClickCallback" />
+
     </data>
 
     <TextView
         style="@style/Tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="@{() -> callback.onClick(tag)}"
         android:text="@{tag}" />
 
 </layout>
