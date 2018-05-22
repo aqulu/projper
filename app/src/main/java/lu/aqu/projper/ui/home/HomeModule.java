@@ -13,7 +13,7 @@ import lu.aqu.projper.ui.home.adapter.ProjectsAdapter;
 public abstract class HomeModule {
 
     @Provides
-    static HomeContract.Presenter provideHomePresenter(HomePresenter presenter) {
+    static HomeContract.Presenter homePresenter(HomePresenter presenter) {
         return presenter;
     }
 
@@ -36,7 +36,7 @@ public abstract class HomeModule {
             }
 
             @Override
-            public void onTagClick(String tag) {
+            public void onClick(String tag) {
                 presenter.onTagClicked(tag);
             }
         };

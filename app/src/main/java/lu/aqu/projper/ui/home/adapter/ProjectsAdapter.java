@@ -46,7 +46,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
             holder.dataBinding.setCallback(callback);
             holder.dataBinding.tags.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
             holder.dataBinding.tags.addItemDecoration(new SpacerItemDecoration(context, SpacerItemDecoration.HORIZONTAL, R.dimen.space_sm));
-            holder.dataBinding.tags.setAdapter(new TagsAdapter(project.getTags(), callback::onTagClick));
+            holder.dataBinding.tags.setAdapter(new TagsAdapter(project.getTags(), callback));
         }
     }
 
@@ -78,9 +78,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
         }
     }
 
-    public interface ProjectClickCallback {
+    public interface ProjectClickCallback extends TagsAdapter.TagClickCallback {
         void onClick(Project project);
-
-        void onTagClick(String tag);
     }
 }
