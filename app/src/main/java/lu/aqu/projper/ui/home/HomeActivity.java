@@ -2,6 +2,7 @@ package lu.aqu.projper.ui.home;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 
@@ -19,6 +20,7 @@ import lu.aqu.projper.ui.home.adapter.ProjectsAdapter;
 public class HomeActivity extends BaseActivity<HomeContract.Presenter> implements HomeContract.View {
 
     private ActivityHomeBinding binding;
+    private BottomSheetBehavior bottomSheetBehavior;
 
     @Inject
     LinearLayoutManager linearLayoutManager;
@@ -33,6 +35,9 @@ public class HomeActivity extends BaseActivity<HomeContract.Presenter> implement
     protected void onCreate(Bundle savedInstanceState) {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         super.onCreate(savedInstanceState);
+
+        bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet.container);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
     @Override
@@ -46,5 +51,11 @@ public class HomeActivity extends BaseActivity<HomeContract.Presenter> implement
     @Override
     public void showMessage(String message) {
         Snackbar.make(binding.container, message, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showProject(Project project) {
+        binding.bottomSheet.setProject(project);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
     }
 }

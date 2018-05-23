@@ -42,7 +42,7 @@ public class HomePresenter extends RxPresenter<HomeContract.View> implements Hom
 
     @Override
     public void onProjectClicked(Project project) {
-        getView().showMessage(project.getName() + " has been clicked");
+        getView().showProject(project);
     }
 
     @Override

@@ -12,6 +12,8 @@ public interface HomeContract {
         void showModel(List<Project> model);
 
         void showMessage(String message);
+
+        void showProject(Project project);
     }
 
     interface Presenter extends BasePresenter<View> {
