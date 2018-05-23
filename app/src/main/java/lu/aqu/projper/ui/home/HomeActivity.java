@@ -4,7 +4,9 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import java.util.List;
 
@@ -35,9 +37,13 @@ public class HomeActivity extends BaseActivity<HomeContract.Presenter> implement
     protected void onCreate(Bundle savedInstanceState) {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         super.onCreate(savedInstanceState);
+        initBottomSheet(binding.bottomSheet.container);
+    }
 
-        bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet.container);
+    private void initBottomSheet(View bottomSheet) {
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        ViewCompat.setElevation(bottomSheet, getResources().getDimension(R.dimen.bottom_sheet_elevation));
     }
 
     @Override
