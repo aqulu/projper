@@ -37,7 +37,7 @@ public class HomeActivity extends BaseActivity<HomeContract.Presenter> implement
     protected void onCreate(Bundle savedInstanceState) {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         super.onCreate(savedInstanceState);
-        initBottomSheet(binding.bottomSheet.container);
+        initBottomSheet(binding.bottomSheet.getRoot());
     }
 
     private void initBottomSheet(View bottomSheet) {
