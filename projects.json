@@ -3,6 +3,12 @@
 		"id": 1,
 		"name": "project helper",
 		"description": "platform to share project ideas, helping other programmers to create something interesting while - for example - learning a new programming language.",
+		"features": [
+			"CRUD project ideas",
+			"user accounts",
+			"favorites",
+			"link repositories to ideas (as reference implementation)"
+		],
 		"tags": [
 			"web",
 			"api",
@@ -14,6 +20,11 @@
 		"id": 2,
 		"name": "habit enforcer",
 		"description": "a simple, self-hostable and privacy protecting service that sends push notifications to a mobile device, to remind the user of their goals / habits",
+		"features": [
+			"user account only requires password; use uuid for each individual device",
+			"pw reset via push notification to device",
+			"server can be self hosted: server url must be configurable in app"
+		],
 		"tags": [
 			"api",
 			"selfhosted",
@@ -27,6 +38,14 @@
 		"id": 3,
 		"name": "how to be a hero online",
 		"description": "a platform supporting players in a game of www.howtobeahero.de tabletop rpg system",
+		"features": [
+			"game master can create a game lobby where people can join",
+			"virtually roll a dice, if prompted by game master",
+			"players can create a character sheet",
+			"game master can award skill points for the player to distribute",
+			"images can be shared in a game lobby (map sketches, items, ...)",
+			"inventory system for player (game master can send items)"
+		],
 		"tags": [
 			"web",
 			"api",
