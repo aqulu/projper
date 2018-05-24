@@ -3,13 +3,14 @@ package lu.aqu.projper.ui.home.adapter;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
+import android.support.v7.util.SortedList;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -21,14 +22,53 @@ import lu.aqu.projper.ui.component.SpacerItemDecoration;
 
 public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHolder> {
 
-    private final List<Project> projects = new ArrayList<>();
-    private final ProjectClickCallback callback;
+    private final ProjectClickCallback mCallback;
     private Context context = null;
+    private final Comparator<Project> mComparator;
 
     @Inject
-    public ProjectsAdapter(ProjectClickCallback callback) {
-        this.callback = callback;
+    public ProjectsAdapter(ProjectClickCallback callback, Comparator<Project> comparator) {
+        mCallback = callback;
+        mComparator = comparator;
     }
+
+    private final SortedList<Project> mProjects = new SortedList<>(Project.class, new SortedList.Callback<Project>() {
+
+        @Override
+        public int compare(Project o1, Project o2) {
+            return mComparator.compare(o1, o2);
+        }
+
+        @Override
+        public void onInserted(int position, int count) {
+            notifyItemRangeInserted(position, count);
+        }
+
+        @Override
+        public void onRemoved(int position, int count) {
+            notifyItemRangeRemoved(position, count);
+        }
+
+        @Override
+        public void onMoved(int fromPosition, int toPosition) {
+            notifyItemMoved(fromPosition, toPosition);
+        }
+
+        @Override
+        public void onChanged(int position, int count) {
+            notifyItemRangeChanged(position, count);
+        }
+
+        @Override
+        public boolean areContentsTheSame(Project oldItem, Project newItem) {
+            return oldItem.equals(newItem);
+        }
+
+        @Override
+        public boolean areItemsTheSame(Project item1, Project item2) {
+            return item1.getId() == item2.getId();
+        }
+    });
 
     @NonNull
     @Override
@@ -40,19 +80,19 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final Project project = projects.get(position);
+        final Project project = mProjects.get(position);
         if (holder.dataBinding != null) {
             holder.dataBinding.setProject(project);
-            holder.dataBinding.setCallback(callback);
+            holder.dataBinding.setCallback(mCallback);
             holder.dataBinding.tags.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
             holder.dataBinding.tags.addItemDecoration(new SpacerItemDecoration(context, SpacerItemDecoration.HORIZONTAL, R.dimen.space_sm));
-            holder.dataBinding.tags.setAdapter(new TagsAdapter(project.getTags(), callback));
+            holder.dataBinding.tags.setAdapter(new TagsAdapter(project.getTags(), mCallback));
         }
     }
 
     @Override
     public int getItemCount() {
-        return projects.size();
+        return mProjects.size();
     }
 
     /**
@@ -61,11 +101,15 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
      * @param projects projects to display
      */
     public void setProjects(List<Project> projects) {
+        mProjects.beginBatchedUpdates();
+
+        mProjects.clear();
         if (projects != null) {
-            this.projects.clear();
-            this.projects.addAll(projects);
-            notifyDataSetChanged();
+            mProjects.addAll(projects);
         }
+
+        mProjects.endBatchedUpdates();
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

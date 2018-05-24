@@ -2,6 +2,8 @@ package lu.aqu.projper.ui.home;
 
 import android.support.v7.widget.LinearLayoutManager;
 
+import java.util.Comparator;
+
 import dagger.Module;
 import dagger.Provides;
 import lu.aqu.projper.R;
@@ -32,6 +34,11 @@ public abstract class HomeModule {
     @Provides
     static SpacerItemDecoration spacerItemDecoration(HomeActivity activity) {
         return new SpacerItemDecoration(activity, SpacerItemDecoration.VERTICAL, R.dimen.item_spacing);
+    }
+
+    @Provides
+    static Comparator<Project> projectComparator() {
+        return (project, t1) -> Long.compare(project.getId(), t1.getId());
     }
 
     @Provides
