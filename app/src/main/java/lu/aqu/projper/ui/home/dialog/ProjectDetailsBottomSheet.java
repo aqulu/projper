@@ -16,6 +16,7 @@ import lu.aqu.projper.databinding.BottomSheetProjectBinding;
 import lu.aqu.projper.model.Project;
 import lu.aqu.projper.ui.BaseBottomSheetDialogFragment;
 import lu.aqu.projper.ui.component.SpacerItemDecoration;
+import lu.aqu.projper.ui.home.adapter.FeaturesAdapter;
 import lu.aqu.projper.ui.home.adapter.TagsAdapter;
 
 public class ProjectDetailsBottomSheet extends BaseBottomSheetDialogFragment<ProjectDetailsContract.Presenter> implements ProjectDetailsContract.View {
@@ -26,6 +27,9 @@ public class ProjectDetailsBottomSheet extends BaseBottomSheetDialogFragment<Pro
 
     @Inject
     TagsAdapter tagsAdapter;
+
+    @Inject
+    FeaturesAdapter featuresAdapter;
 
     @Inject
     public ProjectDetailsBottomSheet() {
@@ -39,6 +43,10 @@ public class ProjectDetailsBottomSheet extends BaseBottomSheetDialogFragment<Pro
         dataBinding = DataBindingUtil.bind(view);
 
         if (dataBinding != null && getContext() != null) {
+            dataBinding.features.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+            dataBinding.features.addItemDecoration(new SpacerItemDecoration(getContext(), SpacerItemDecoration.VERTICAL, R.dimen.space_sm));
+            dataBinding.features.setAdapter(featuresAdapter);
+
             dataBinding.tags.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
             dataBinding.tags.addItemDecoration(new SpacerItemDecoration(getContext(), SpacerItemDecoration.HORIZONTAL, R.dimen.space_sm));
             dataBinding.tags.setAdapter(tagsAdapter);
@@ -61,6 +69,7 @@ public class ProjectDetailsBottomSheet extends BaseBottomSheetDialogFragment<Pro
     @Override
     public void showModel(Project project) {
         dataBinding.setProject(project);
+        featuresAdapter.setFeatures(project.getFeatures());
         tagsAdapter.setTags(project.getTags());
     }
 }

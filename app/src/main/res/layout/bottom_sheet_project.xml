@@ -41,6 +41,15 @@
             android:layout_height="@dimen/space_md" />
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/features"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_md" />
+
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/tags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

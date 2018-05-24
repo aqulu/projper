@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Projper</string>
+
+    <string name="bullet_point">●</string>
 </resources>
