@@ -14,6 +14,10 @@ public abstract class BaseBottomSheetDialogFragment<T extends BasePresenter> ext
     @Inject
     T presenter;
 
+    public T getPresenter() {
+        return presenter;
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

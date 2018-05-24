@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +15,17 @@ import lu.aqu.projper.R;
 import lu.aqu.projper.databinding.BottomSheetProjectBinding;
 import lu.aqu.projper.model.Project;
 import lu.aqu.projper.ui.BaseBottomSheetDialogFragment;
+import lu.aqu.projper.ui.component.SpacerItemDecoration;
+import lu.aqu.projper.ui.home.adapter.TagsAdapter;
 
 public class ProjectDetailsBottomSheet extends BaseBottomSheetDialogFragment<ProjectDetailsContract.Presenter> implements ProjectDetailsContract.View {
 
     private static final String ARG_PROJECT = "project";
 
     private BottomSheetProjectBinding dataBinding;
+
+    @Inject
+    TagsAdapter tagsAdapter;
 
     @Inject
     public ProjectDetailsBottomSheet() {
@@ -31,6 +37,13 @@ public class ProjectDetailsBottomSheet extends BaseBottomSheetDialogFragment<Pro
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.bottom_sheet_project, container, false);
         dataBinding = DataBindingUtil.bind(view);
+
+        if (dataBinding != null && getContext() != null) {
+            dataBinding.tags.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+            dataBinding.tags.addItemDecoration(new SpacerItemDecoration(getContext(), SpacerItemDecoration.HORIZONTAL, R.dimen.space_sm));
+            dataBinding.tags.setAdapter(tagsAdapter);
+        }
+
         return view;
     }
 
@@ -48,5 +61,6 @@ public class ProjectDetailsBottomSheet extends BaseBottomSheetDialogFragment<Pro
     @Override
     public void showModel(Project project) {
         dataBinding.setProject(project);
+        tagsAdapter.setTags(project.getTags());
     }
 }
