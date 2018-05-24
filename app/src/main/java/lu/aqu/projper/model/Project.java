@@ -15,6 +15,8 @@ public class Project implements Parcelable {
     private String name;
     @SerializedName("description")
     private String description;
+    @SerializedName("features")
+    private List<String> features;
     @SerializedName("tags")
     private List<String> tags;
 
@@ -22,6 +24,7 @@ public class Project implements Parcelable {
         id = in.readLong();
         name = in.readString();
         description = in.readString();
+        features = in.createStringArrayList();
         tags = in.createStringArrayList();
     }
 
@@ -47,6 +50,7 @@ public class Project implements Parcelable {
         parcel.writeLong(id);
         parcel.writeString(name);
         parcel.writeString(description);
+        parcel.writeStringList(features);
         parcel.writeStringList(tags);
     }
 
@@ -60,6 +64,10 @@ public class Project implements Parcelable {
 
     public String getDescription() {
         return description;
+    }
+
+    public List<String> getFeatures() {
+        return features;
     }
 
     public List<String> getTags() {
