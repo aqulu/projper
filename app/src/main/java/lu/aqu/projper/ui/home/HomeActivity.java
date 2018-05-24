@@ -2,11 +2,8 @@ package lu.aqu.projper.ui.home;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.Snackbar;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.View;
 
 import java.util.List;
 
@@ -18,11 +15,11 @@ import lu.aqu.projper.model.Project;
 import lu.aqu.projper.ui.BaseActivity;
 import lu.aqu.projper.ui.component.SpacerItemDecoration;
 import lu.aqu.projper.ui.home.adapter.ProjectsAdapter;
+import lu.aqu.projper.ui.home.dialog.ProjectDetailsBottomSheet;
 
 public class HomeActivity extends BaseActivity<HomeContract.Presenter> implements HomeContract.View {
 
     private ActivityHomeBinding binding;
-    private BottomSheetBehavior bottomSheetBehavior;
 
     @Inject
     LinearLayoutManager linearLayoutManager;
@@ -33,17 +30,13 @@ public class HomeActivity extends BaseActivity<HomeContract.Presenter> implement
     @Inject
     ProjectsAdapter projectsAdapter;
 
+    @Inject
+    ProjectDetailsBottomSheet bottomSheet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         super.onCreate(savedInstanceState);
-        initBottomSheet(binding.bottomSheet.getRoot());
-    }
-
-    private void initBottomSheet(View bottomSheet) {
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        ViewCompat.setElevation(bottomSheet, getResources().getDimension(R.dimen.bottom_sheet_elevation));
     }
 
     @Override
@@ -61,7 +54,7 @@ public class HomeActivity extends BaseActivity<HomeContract.Presenter> implement
 
     @Override
     public void showProject(Project project) {
-        binding.bottomSheet.setProject(project);
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        bottomSheet.setProjectArgument(project);
+        bottomSheet.show(getSupportFragmentManager(), "bottomsheet");
     }
 }

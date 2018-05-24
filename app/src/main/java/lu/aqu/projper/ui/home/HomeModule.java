@@ -8,12 +8,19 @@ import lu.aqu.projper.R;
 import lu.aqu.projper.model.Project;
 import lu.aqu.projper.ui.component.SpacerItemDecoration;
 import lu.aqu.projper.ui.home.adapter.ProjectsAdapter;
+import lu.aqu.projper.ui.home.dialog.ProjectDetailsContract;
+import lu.aqu.projper.ui.home.dialog.ProjectDetailsPresenter;
 
 @Module
 public abstract class HomeModule {
 
     @Provides
     static HomeContract.Presenter homePresenter(HomePresenter presenter) {
+        return presenter;
+    }
+
+    @Provides
+    static ProjectDetailsContract.Presenter projectDetailsPresenter(ProjectDetailsPresenter presenter) {
         return presenter;
     }
 
