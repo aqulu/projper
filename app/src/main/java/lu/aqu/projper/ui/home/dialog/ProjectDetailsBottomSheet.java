@@ -31,11 +31,6 @@ public class ProjectDetailsBottomSheet extends BaseBottomSheetDialogFragment<Pro
     @Inject
     FeaturesAdapter featuresAdapter;
 
-    @Inject
-    public ProjectDetailsBottomSheet() {
-
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);

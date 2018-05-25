@@ -22,6 +22,7 @@ public class HomePresenter extends RxPresenter<HomeContract.View> implements Hom
     ProjectService projectService;
 
     private List<Project> projects = new ArrayList<>();
+    private List<String> activeFilters = new ArrayList<>();
 
     @Inject
     public HomePresenter() {
@@ -47,22 +48,35 @@ public class HomePresenter extends RxPresenter<HomeContract.View> implements Hom
     }
 
     @Override
+    public void onFilterTagClicked(String tag) {
+        activeFilters.remove(tag);
+        getView().showFilterTags(activeFilters);
+        getView().showModel(getFilteredProjects());
+    }
+
+    @Override
     public void onProjectClicked(Project project) {
         getView().showProject(project);
     }
 
     @Override
     public void onTagClicked(String tag) {
-        if (projects != null) {
-            final List<Project> filtered = new ArrayList<>();
+        activeFilters.add(tag);
+        getView().showFilterTags(activeFilters);
+        getView().showModel(getFilteredProjects());
+    }
 
+    private List<Project> getFilteredProjects() {
+        final List<Project> filtered = new ArrayList<>();
+
+        if (projects != null) {
             for (Project project : projects) {
-                if (project.getTags().contains(tag)) {
+                if (project.getTags().containsAll(activeFilters)) {
                     filtered.add(project);
                 }
             }
-
-            getView().showModel(filtered);
         }
+
+        return filtered;
     }
 }

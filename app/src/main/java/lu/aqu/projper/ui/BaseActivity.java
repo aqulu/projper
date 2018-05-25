@@ -1,22 +1,20 @@
 package lu.aqu.projper.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjection;
-import lu.aqu.projper.mvp.BaseView;
+import dagger.android.support.DaggerAppCompatActivity;
 import lu.aqu.projper.mvp.BasePresenter;
+import lu.aqu.projper.mvp.BaseView;
 
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements BaseView {
+public abstract class BaseActivity<T extends BasePresenter> extends DaggerAppCompatActivity implements BaseView {
 
     @Inject
     T presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         presenter.onViewAdded(this);
     }

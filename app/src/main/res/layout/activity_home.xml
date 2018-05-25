@@ -3,24 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.home.HomeActivity">
 
-    <android.support.constraint.ConstraintLayout
+    <RelativeLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/filter_tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/item_spacing"
+            android:paddingEnd="@dimen/activity_margin"
+            android:paddingLeft="@dimen/activity_margin"
+            android:paddingRight="@dimen/activity_margin"
+            android:paddingStart="@dimen/activity_margin"
+            android:paddingTop="@dimen/item_spacing" />
+
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/projects"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/filter_tags"
             android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingEnd="@dimen/activity_margin"
             android:paddingLeft="@dimen/activity_margin"
             android:paddingRight="@dimen/activity_margin"
             android:paddingStart="@dimen/activity_margin"
-            android:paddingTop="@dimen/item_spacing"
             android:scrollbarStyle="outsideOverlay"
             android:scrollbars="vertical" />
 
-    </android.support.constraint.ConstraintLayout>
+    </RelativeLayout>
 </layout>

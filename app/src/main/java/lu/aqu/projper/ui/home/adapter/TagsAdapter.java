@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import lu.aqu.projper.R;
 import lu.aqu.projper.databinding.TagItemBinding;
 
@@ -19,11 +17,6 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.ViewHolder> {
 
     private final List<String> tags;
     private final TagClickCallback callback;
-
-    @Inject
-    public TagsAdapter() {
-        this(new ArrayList<>(), null);
-    }
 
     public TagsAdapter(List<String> tags, TagClickCallback callback) {
         this.tags = tags != null ? tags : new ArrayList<>();
