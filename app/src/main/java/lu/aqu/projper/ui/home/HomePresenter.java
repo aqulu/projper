@@ -3,6 +3,9 @@ package lu.aqu.projper.ui.home;
 import android.annotation.SuppressLint;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -17,6 +20,8 @@ public class HomePresenter extends RxPresenter<HomeContract.View> implements Hom
 
     @Inject
     ProjectService projectService;
+
+    private List<Project> projects = new ArrayList<>();
 
     @Inject
     public HomePresenter() {
@@ -34,10 +39,11 @@ public class HomePresenter extends RxPresenter<HomeContract.View> implements Hom
                 .compose(collectDispoable())
                 .subscribe(projects -> {
                     view.showModel(projects);
-                    for (Project project : projects) {
-                        Log.d("home", project.getName());
-                    }
-                }, throwable -> Log.d("home", "a-oh"));
+                    this.projects = projects;
+                }, throwable -> {
+                    Log.e("Home", "project lookup failed", throwable);
+                    view.showMessage("project lookup failed");
+                });
     }
 
     @Override
@@ -47,6 +53,16 @@ public class HomePresenter extends RxPresenter<HomeContract.View> implements Hom
 
     @Override
     public void onTagClicked(String tag) {
-        getView().showMessage("tag " + tag + " has been clicked");
+        if (projects != null) {
+            final List<Project> filtered = new ArrayList<>();
+
+            for (Project project : projects) {
+                if (project.getTags().contains(tag)) {
+                    filtered.add(project);
+                }
+            }
+
+            getView().showModel(filtered);
+        }
     }
 }
