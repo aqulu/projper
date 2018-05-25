@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import java.util.List;
 
@@ -64,6 +65,7 @@ public class HomeActivity extends BaseActivity<HomeContract.Presenter> implement
         }
 
         tagsAdapter.setTags(tags);
+        binding.filterTags.setVisibility((tags == null || tags.isEmpty()) ? View.GONE : View.VISIBLE);
     }
 
     @Override

@@ -50,8 +50,7 @@ public class HomePresenter extends RxPresenter<HomeContract.View> implements Hom
     @Override
     public void onFilterTagClicked(String tag) {
         activeFilters.remove(tag);
-        getView().showFilterTags(activeFilters);
-        getView().showModel(getFilteredProjects());
+        filterProducts(activeFilters);
     }
 
     @Override
@@ -61,22 +60,24 @@ public class HomePresenter extends RxPresenter<HomeContract.View> implements Hom
 
     @Override
     public void onTagClicked(String tag) {
-        activeFilters.add(tag);
-        getView().showFilterTags(activeFilters);
-        getView().showModel(getFilteredProjects());
+        if (!activeFilters.contains(tag)) {
+            activeFilters.add(tag);
+        }
+        filterProducts(activeFilters);
     }
 
-    private List<Project> getFilteredProjects() {
+    private void filterProducts(List<String> tags) {
         final List<Project> filtered = new ArrayList<>();
 
         if (projects != null) {
             for (Project project : projects) {
-                if (project.getTags().containsAll(activeFilters)) {
+                if (project.getTags().containsAll(tags)) {
                     filtered.add(project);
                 }
             }
         }
 
-        return filtered;
+        getView().showFilterTags(tags);
+        getView().showModel(filtered);
     }
 }

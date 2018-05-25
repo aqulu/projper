@@ -12,12 +12,12 @@
             android:id="@+id/filter_tags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/item_spacing"
             android:paddingEnd="@dimen/activity_margin"
             android:paddingLeft="@dimen/activity_margin"
             android:paddingRight="@dimen/activity_margin"
             android:paddingStart="@dimen/activity_margin"
-            android:paddingTop="@dimen/item_spacing" />
+            android:paddingTop="@dimen/item_spacing"
+            android:visibility="gone" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/projects"
@@ -30,6 +30,7 @@
             android:paddingLeft="@dimen/activity_margin"
             android:paddingRight="@dimen/activity_margin"
             android:paddingStart="@dimen/activity_margin"
+            android:paddingTop="@dimen/item_spacing"
             android:scrollbarStyle="outsideOverlay"
             android:scrollbars="vertical" />
 
