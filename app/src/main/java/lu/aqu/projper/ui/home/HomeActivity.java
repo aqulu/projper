@@ -41,9 +41,12 @@ public class HomeActivity extends BaseActivity<HomeContract.Presenter> implement
 
     @Override
     public void showModel(List<Project> projects) {
-        binding.projects.setAdapter(projectsAdapter);
-        binding.projects.setLayoutManager(linearLayoutManager);
-        binding.projects.addItemDecoration(itemDecoration);
+        if (binding.projects.getAdapter() == null) {
+            binding.projects.setAdapter(projectsAdapter);
+            binding.projects.setLayoutManager(linearLayoutManager);
+            binding.projects.addItemDecoration(itemDecoration);
+        }
+
         projectsAdapter.setProjects(projects);
     }
 

@@ -1,6 +1,5 @@
 package lu.aqu.projper.ui.home.adapter;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.util.SortedList;
@@ -23,7 +22,6 @@ import lu.aqu.projper.ui.component.SpacerItemDecoration;
 public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHolder> {
 
     private final ProjectClickCallback mCallback;
-    private Context context = null;
     private final Comparator<Project> mComparator;
 
     @Inject
@@ -73,8 +71,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        context = parent.getContext();
-        View view = LayoutInflater.from(context).inflate(R.layout.project_card, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.project_card, parent, false);
         return new ViewHolder(view);
     }
 
@@ -84,8 +81,6 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
         if (holder.dataBinding != null) {
             holder.dataBinding.setProject(project);
             holder.dataBinding.setCallback(mCallback);
-            holder.dataBinding.tags.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
-            holder.dataBinding.tags.addItemDecoration(new SpacerItemDecoration(context, SpacerItemDecoration.HORIZONTAL, R.dimen.space_sm));
             holder.dataBinding.tags.setAdapter(new TagsAdapter(project.getTags(), mCallback));
         }
     }
@@ -119,6 +114,10 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
         public ViewHolder(View itemView) {
             super(itemView);
             dataBinding = DataBindingUtil.bind(itemView);
+            if (dataBinding != null) {
+                dataBinding.tags.setLayoutManager(new LinearLayoutManager(itemView.getContext(), LinearLayoutManager.HORIZONTAL, false));
+                dataBinding.tags.addItemDecoration(new SpacerItemDecoration(itemView.getContext(), SpacerItemDecoration.HORIZONTAL, R.dimen.space_sm));
+            }
         }
     }
 
