@@ -38,3 +38,7 @@
 }
 # Ignore annotation used for build tooling.
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+
+# retrolambda
+-dontwarn java.lang.invoke.*
+-dontwarn **$$Lambda$*
