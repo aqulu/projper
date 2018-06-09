@@ -3,6 +3,9 @@ package lu.aqu.projper.ui.home;
 import android.annotation.SuppressLint;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -17,6 +20,9 @@ public class HomePresenter extends RxPresenter<HomeContract.View> implements Hom
 
     @Inject
     ProjectService projectService;
+
+    private List<Project> projects = new ArrayList<>();
+    private List<String> activeFilters = new ArrayList<>();
 
     @Inject
     public HomePresenter() {
@@ -34,19 +40,44 @@ public class HomePresenter extends RxPresenter<HomeContract.View> implements Hom
                 .compose(collectDispoable())
                 .subscribe(projects -> {
                     view.showModel(projects);
-                    for (Project project : projects) {
-                        Log.d("home", project.getName());
-                    }
-                }, throwable -> Log.d("home", "a-oh"));
+                    this.projects = projects;
+                }, throwable -> {
+                    Log.e("Home", "project lookup failed", throwable);
+                    view.showMessage("project lookup failed");
+                });
+    }
+
+    @Override
+    public void onFilterTagClicked(String tag) {
+        activeFilters.remove(tag);
+        filterProducts(activeFilters);
     }
 
     @Override
     public void onProjectClicked(Project project) {
-        getView().showMessage(project.getName() + " has been clicked");
+        getView().showProject(project);
     }
 
     @Override
     public void onTagClicked(String tag) {
-        getView().showMessage("tag " + tag + " has been clicked");
+        if (!activeFilters.contains(tag)) {
+            activeFilters.add(tag);
+        }
+        filterProducts(activeFilters);
+    }
+
+    private void filterProducts(List<String> tags) {
+        final List<Project> filtered = new ArrayList<>();
+
+        if (projects != null) {
+            for (Project project : projects) {
+                if (project.getTags().containsAll(tags)) {
+                    filtered.add(project);
+                }
+            }
+        }
+
+        getView().showFilterTags(tags);
+        getView().showModel(filtered);
     }
 }

@@ -10,58 +10,53 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import lu.aqu.projper.R;
-import lu.aqu.projper.databinding.TagItemBinding;
+import lu.aqu.projper.databinding.FeatureItemBinding;
 
-public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.ViewHolder> {
+public class FeaturesAdapter extends RecyclerView.Adapter<FeaturesAdapter.ViewHolder> {
 
-    private final List<String> tags;
-    private final TagClickCallback callback;
+    private final List<String> features = new ArrayList<>();
 
-    public TagsAdapter(List<String> tags, TagClickCallback callback) {
-        this.tags = tags != null ? tags : new ArrayList<>();
-        this.callback = callback;
+    @Inject
+    public FeaturesAdapter() {
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tag_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.feature_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (holder.dataBinding != null) {
-            holder.dataBinding.setTag(tags.get(position));
-            holder.dataBinding.setCallback(callback);
+            holder.dataBinding.setFeature(features.get(position));
         }
     }
 
     @Override
     public int getItemCount() {
-        return tags.size();
+        return features.size();
     }
 
-    public void setTags(List<String> tags) {
-        if (tags != null) {
-            this.tags.clear();
-            this.tags.addAll(tags);
-            notifyDataSetChanged();
+    public void setFeatures(List<String> features) {
+        this.features.clear();
+        if (features != null) {
+            this.features.addAll(features);
         }
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final TagItemBinding dataBinding;
+        private final FeatureItemBinding dataBinding;
 
         public ViewHolder(View itemView) {
             super(itemView);
             dataBinding = DataBindingUtil.bind(itemView);
         }
-    }
-
-    public interface TagClickCallback {
-        void onClick(String tag);
     }
 }
