@@ -7,6 +7,7 @@ dependencies {
 
     implementation project(':project-domain')
     implementation project(':project-infra')
+    implementation project(':project-usecase')
 
     testImplementation "junit:junit:$junit_version"
     testImplementation "androidx.test:runner:$test_version"

@@ -1,0 +1,6 @@
+apply from: '../../../../buildConfig/usecase.build.gradle'
+
+dependencies {
+    implementation project(':project-infra')
+    implementation project(':project-domain')
+}
