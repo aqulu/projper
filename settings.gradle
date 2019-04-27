@@ -7,6 +7,7 @@ project(':core').projectDir = new File(modulesDir, 'core')
 def featuresDir = new File(modulesDir, 'features')
 
 def projectDir = new File(featuresDir, 'project')
-include ':project', ':project-domain'
+include ':project', ':project-domain', ':project-infra'
 project(':project').projectDir = new File(projectDir, 'project')
 project(':project-domain').projectDir = new File(projectDir, 'domain')
+project(':project-infra').projectDir = new File(projectDir, 'infra')

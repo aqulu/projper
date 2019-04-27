@@ -6,6 +6,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(':project-domain')
+    implementation project(':project-infra')
 
     testImplementation "junit:junit:$junit_version"
     testImplementation "androidx.test:runner:$test_version"

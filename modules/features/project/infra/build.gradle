@@ -1,0 +1,5 @@
+apply from: '../../../../buildConfig/infra.build.gradle'
+
+dependencies {
+    implementation project(':project-domain')
+}
