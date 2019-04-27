@@ -12,6 +12,9 @@ dependencies {
     // Dagger
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
+    // JSR250
+    compileOnly 'javax.annotation:jsr250-api:1.0'
 }
 
 compileKotlin {
