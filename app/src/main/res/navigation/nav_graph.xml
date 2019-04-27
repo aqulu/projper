@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeDest">
+    app:startDestination="@id/project_nav_graph">
 
-    <fragment
-        android:id="@+id/homeDest"
-        tools:layout="@layout/fragment_home"
-        android:name="lu.aqu.projper.ui.HomeFragment" />
+    <include app:graph="@navigation/project_nav_graph" />
 
 </navigation>

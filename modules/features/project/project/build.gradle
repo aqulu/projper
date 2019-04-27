@@ -9,6 +9,9 @@ dependencies {
     implementation project(':project-infra')
     implementation project(':project-usecase')
 
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
     testImplementation "junit:junit:$junit_version"
     testImplementation "androidx.test:runner:$test_version"
 }
