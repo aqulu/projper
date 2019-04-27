@@ -1,1 +1,6 @@
 include ':app'
+
+def modulesDir = new File('modules')
+
+include ':core'
+project(':core').projectDir = new File(modulesDir, 'core')
