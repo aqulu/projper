@@ -5,6 +5,8 @@ apply from: '../../../../buildConfig/android.config.gradle'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation project(':core')
+
     implementation project(':project-domain')
     implementation project(':project-infra')
     implementation project(':project-usecase')
