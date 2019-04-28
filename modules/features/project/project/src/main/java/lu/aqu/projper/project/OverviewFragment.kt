@@ -7,18 +7,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import lu.aqu.projper.project.di.DaggerOverviewComponent
-import lu.aqu.projper.project.usecase.FindProjectsUseCase
 import javax.inject.Inject
 
 class OverviewFragment : Fragment() {
 
     @Inject
-    lateinit var findProjectsUseCase: FindProjectsUseCase // TODO temporary test
+    lateinit var viewModelFactory: OverviewViewModel.Factory
+
+    private lateinit var viewModel: OverviewViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+
         DaggerOverviewComponent.create().inject(this)
+
+        viewModel = ViewModelProviders
+            .of(this, viewModelFactory)
+            .get(OverviewViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -27,6 +35,9 @@ class OverviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("Overview", findProjectsUseCase.execute().joinToString(", "))
+
+        viewModel.projects.observe(this, Observer { projects ->
+            Log.d("Overview", projects.joinToString(", ") { it.name })
+        })
     }
 }

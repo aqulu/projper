@@ -11,6 +11,9 @@ buildscript {
         junit_version = '4.12'
         nav_version = '2.1.0-alpha02'
         dagger_version = '2.22.1'
+
+        ktx_version = '1.0.1'
+        lifecycle_version = '2.1.0-alpha04'
     }
 
     repositories {
