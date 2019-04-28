@@ -1,19 +1,10 @@
 apply plugin: 'com.android.library'
 
 apply from: '../../../../buildConfig/android.config.gradle'
+apply from: '../../../../buildConfig/android.dependencies.gradle'
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation project(':core')
-
-    implementation project(':project-domain')
-    implementation project(':project-infra')
     implementation project(':project-usecase')
-
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-
-    testImplementation "junit:junit:$junit_version"
-    testImplementation "androidx.test:runner:$test_version"
+    implementation project(':project-infra')
+    implementation project(':project-domain')
 }
