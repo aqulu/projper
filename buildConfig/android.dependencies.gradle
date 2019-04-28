@@ -18,6 +18,7 @@ dependencies {
     // UI
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
+    implementation "com.google.android.material:material:$material_version"
 
     // Dagger
     implementation "com.google.dagger:dagger:$dagger_version"
