@@ -7,7 +7,7 @@ internal object ProjectConverter {
 
     fun toModel(json: ProjectJson): Project =
         Project(
-            id = json.id,
+            id = Project.Id(json.id),
             name = json.name,
             description = json.description,
             features = json.features,
