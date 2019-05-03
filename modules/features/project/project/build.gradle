@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
-apply from: '../../../../buildConfig/android.config.gradle'
-apply from: '../../../../buildConfig/android.dependencies.gradle'
+apply from: '../../../../gradle/android.config.gradle'
+apply from: '../../../../gradle/android.dependencies.gradle'
 
 dependencies {
     implementation project(':project-usecase')

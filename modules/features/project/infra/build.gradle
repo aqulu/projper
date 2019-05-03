@@ -1,4 +1,4 @@
-apply from: '../../../../buildConfig/infra.build.gradle'
+apply from: '../../../../gradle/infra.build.gradle'
 
 dependencies {
     implementation project(':project-domain')

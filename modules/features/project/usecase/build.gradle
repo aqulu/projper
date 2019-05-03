@@ -1,4 +1,4 @@
-apply from: '../../../../buildConfig/usecase.build.gradle'
+apply from: '../../../../gradle/usecase.build.gradle'
 
 dependencies {
     implementation project(':project-infra')
