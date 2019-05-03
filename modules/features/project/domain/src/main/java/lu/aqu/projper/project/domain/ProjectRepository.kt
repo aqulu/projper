@@ -1,5 +1,5 @@
 package lu.aqu.projper.project.domain
 
 interface ProjectRepository {
-    fun findAll(): List<Project>
+    suspend fun findAll(): List<Project>
 }

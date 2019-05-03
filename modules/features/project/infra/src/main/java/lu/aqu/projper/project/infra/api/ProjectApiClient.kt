@@ -1,9 +1,11 @@
 package lu.aqu.projper.project.infra.api
 
+import kotlinx.coroutines.Deferred
 import lu.aqu.projper.project.infra.api.json.ProjectJson
+import retrofit2.http.GET
 
 internal interface ProjectApiClient {
 
-    // TODO change to Retrofit result
-    fun findAll(): List<ProjectJson>
+    @GET("projects.json")
+    fun findAllAsync(): Deferred<List<ProjectJson>>
 }
