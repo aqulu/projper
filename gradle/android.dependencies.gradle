@@ -5,6 +5,10 @@ apply plugin: 'kotlin-kapt'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    // kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
+
     implementation project(':core')
     implementation project(':resources')
 
@@ -31,9 +35,6 @@ dependencies {
 
     // JSR250
     compileOnly 'javax.annotation:jsr250-api:1.0'
-
-    // kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
     // test
     testImplementation "junit:junit:$junit_version"
