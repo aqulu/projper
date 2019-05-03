@@ -1,0 +1,15 @@
+include ':app'
+def modulesDir = new File('modules')
+
+include ':core', ':resources'
+project(':core').projectDir = new File(modulesDir, 'core')
+project(':resources').projectDir = new File(modulesDir, 'resources')
+
+def featuresDir = new File(modulesDir, 'features')
+
+def projectDir = new File(featuresDir, 'project')
+include ':project', ':project-domain', ':project-infra',':project-usecase'
+project(':project').projectDir = new File(projectDir, 'project')
+project(':project-domain').projectDir = new File(projectDir, 'domain')
+project(':project-infra').projectDir = new File(projectDir, 'infra')
+project(':project-usecase').projectDir = new File(projectDir, 'usecase')

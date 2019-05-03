@@ -1,0 +1,8 @@
+apply plugin: 'com.android.library'
+
+apply from: '../../gradle/android.config.gradle'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.google.android.material:material:$material_version"
+}

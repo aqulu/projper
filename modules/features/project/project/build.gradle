@@ -1,0 +1,10 @@
+apply plugin: 'com.android.library'
+
+apply from: '../../../../gradle/android.config.gradle'
+apply from: '../../../../gradle/android.dependencies.gradle'
+
+dependencies {
+    implementation project(':project-usecase')
+    implementation project(':project-infra')
+    implementation project(':project-domain')
+}
