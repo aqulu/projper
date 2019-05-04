@@ -8,4 +8,6 @@ interface CoroutineUseCase<T> {
         onError: (Throwable) -> Unit = {},
         onFinished: () -> Unit = {}
     )
+
+    fun unsubscribe()
 }

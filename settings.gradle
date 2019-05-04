@@ -1,9 +1,9 @@
 include ':app'
 def modulesDir = new File('modules')
 
-include ':core', ':resources'
+include ':core', ':shared'
 project(':core').projectDir = new File(modulesDir, 'core')
-project(':resources').projectDir = new File(modulesDir, 'resources')
+project(':shared').projectDir = new File(modulesDir, 'shared')
 
 def featuresDir = new File(modulesDir, 'features')
 

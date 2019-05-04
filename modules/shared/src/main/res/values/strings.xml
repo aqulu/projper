@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">resources</string>
+
+    <string name="error_data_fetching">an error occurred while fetching data</string>
+</resources>

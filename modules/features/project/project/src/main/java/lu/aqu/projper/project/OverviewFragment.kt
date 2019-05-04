@@ -2,13 +2,16 @@ package lu.aqu.projper.project
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import kotlinx.android.synthetic.main.fragment_overview.*
+import kotlinx.android.synthetic.main.fragment_overview.projectRecyclerView
+import lu.aqu.core.support.Resource
 import lu.aqu.projper.project.di.DaggerOverviewComponent
 import javax.inject.Inject
 
@@ -38,6 +41,18 @@ class OverviewFragment : Fragment() {
 
         val adapter = ProjectAdapter()
         projectRecyclerView.adapter = adapter
-        viewModel.projects.observe(this, Observer(adapter::submitList))
+
+        viewModel.projects.observe(this, Observer {
+            when (it) {
+                is Resource.Success -> {
+                    adapter.submitList(it.data)
+                }
+
+                is Resource.Error -> {
+                    Log.w("Overview", it.throwable)
+                    Toast.makeText(context, R.string.error_data_fetching, Toast.LENGTH_LONG).show()
+                }
+            }
+        })
     }
 }

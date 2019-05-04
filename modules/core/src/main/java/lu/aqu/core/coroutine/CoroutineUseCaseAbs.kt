@@ -40,7 +40,7 @@ abstract class CoroutineUseCaseAbs<T>(
 
     protected abstract suspend fun executeAsync(): T
 
-    fun unsubscribe() {
+    override fun unsubscribe() {
         job?.run {
             cancelChildren()
             cancel()
