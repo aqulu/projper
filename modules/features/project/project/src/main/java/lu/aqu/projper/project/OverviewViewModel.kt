@@ -1,9 +1,10 @@
 package lu.aqu.projper.project
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import lu.aqu.core.support.Resource
+import lu.aqu.projper.extensions.asLiveData
 import lu.aqu.projper.project.domain.Project
 import lu.aqu.projper.project.usecase.FindProjectsUseCase
 import javax.inject.Inject
@@ -12,12 +13,7 @@ class OverviewViewModel private constructor(
     findProjectsUseCase: FindProjectsUseCase
 ) : ViewModel() {
 
-    val projects: LiveData<List<Project>> = MutableLiveData<List<Project>>()
-        .apply {
-            findProjectsUseCase.execute(
-                onResult = { value = it }
-            )
-        }
+    val projects: LiveData<Resource<List<Project>>> = findProjectsUseCase.asLiveData()
 
     class Factory @Inject constructor(
         private val findProjectsUseCase: FindProjectsUseCase
