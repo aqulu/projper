@@ -9,8 +9,9 @@ internal class ProjectRepositoryImpl @Inject constructor(
     private val projectApiClient: ProjectApiClient
 ) : ProjectRepository {
 
-    override fun findAll(): List<Project> =
+    override suspend fun findAll(): List<Project> =
         projectApiClient
-            .findAll()
+            .findAllAsync()
+            .await()
             .map(ProjectConverter::toModel)
 }

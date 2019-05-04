@@ -12,10 +12,12 @@ class OverviewViewModel private constructor(
     findProjectsUseCase: FindProjectsUseCase
 ) : ViewModel() {
 
-    val projects: LiveData<List<Project>> = MutableLiveData<List<Project>>().apply {
-        // TODO handle asynchronously
-        value = findProjectsUseCase.execute()
-    }
+    val projects: LiveData<List<Project>> = MutableLiveData<List<Project>>()
+        .apply {
+            findProjectsUseCase.execute(
+                onResult = { value = it }
+            )
+        }
 
     class Factory @Inject constructor(
         private val findProjectsUseCase: FindProjectsUseCase
