@@ -9,6 +9,10 @@ android {
     defaultConfig {
         applicationId "lu.aqu.projper"
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
