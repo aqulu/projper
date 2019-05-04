@@ -2,13 +2,17 @@ package lu.aqu.core.coroutine
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.cancelChildren
 
 abstract class CoroutineUseCaseAbs<T>(
     private val mainDispatcher: CoroutineDispatcher,
     private val workDispatcher: CoroutineDispatcher
 ) : CoroutineUseCase<T> {
+
+    private var job: Job? = null
 
     override fun execute(
         onLoading: () -> Unit,
@@ -16,8 +20,9 @@ abstract class CoroutineUseCaseAbs<T>(
         onError: (Throwable) -> Unit,
         onFinished: () -> Unit
     ) {
-        // TODO handle cancellation; create Job for better handling
-        CoroutineScope(mainDispatcher).launch {
+        unsubscribe()
+
+        job = CoroutineScope(mainDispatcher).launch {
             onLoading()
 
             try {
@@ -34,4 +39,12 @@ abstract class CoroutineUseCaseAbs<T>(
     }
 
     protected abstract suspend fun executeAsync(): T
+
+    fun unsubscribe() {
+        job?.run {
+            cancelChildren()
+            cancel()
+        }
+        job = null
+    }
 }
