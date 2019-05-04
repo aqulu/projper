@@ -10,7 +10,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
 
     implementation project(':core')
-    implementation project(':resources')
+    implementation project(':shared')
 
     // Android architecture components
     implementation "androidx.core:core-ktx:$ktx_version"
