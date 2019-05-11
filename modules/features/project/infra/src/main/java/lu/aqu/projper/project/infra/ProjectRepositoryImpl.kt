@@ -14,4 +14,10 @@ internal class ProjectRepositoryImpl @Inject constructor(
             .findAllAsync()
             .await()
             .map(ProjectConverter::toModel)
+
+    override suspend fun findById(id: Long): Project =
+        projectApiClient
+            .findByIdAsync(id)
+            .await()
+            .let(ProjectConverter::toModel)
 }
