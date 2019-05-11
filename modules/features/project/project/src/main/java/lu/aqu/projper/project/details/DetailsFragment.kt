@@ -8,12 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.navArgs
 import lu.aqu.projper.project.databinding.FragmentDetailsBinding
 import lu.aqu.projper.project.details.di.DaggerDetailsComponent
 import lu.aqu.projper.project.domain.Project
 import javax.inject.Inject
 
 class DetailsFragment : Fragment() {
+
+    private val args: DetailsFragmentArgs by navArgs()
 
     @Inject
     lateinit var viewModelFactory: DetailsViewModel.Factory
@@ -25,7 +28,7 @@ class DetailsFragment : Fragment() {
         super.onAttach(context)
 
         DaggerDetailsComponent.builder()
-            .projectId(Project.Id(1))
+            .projectId(Project.Id(args.id))
             .build()
             .inject(this)
 

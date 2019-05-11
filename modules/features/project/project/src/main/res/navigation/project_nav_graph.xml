@@ -12,4 +12,21 @@
         android:label="@string/title_projects_overview"
         tools:layout="@layout/fragment_overview" />
 
+    <fragment
+        android:id="@+id/detailsDest"
+        android:name="lu.aqu.projper.project.details.DetailsFragment"
+        android:label="{title}"
+        tools:layout="@layout/fragment_details">
+
+        <argument
+            android:name="title"
+            android:defaultValue="Project Details"
+            app:argType="string" />
+
+        <argument
+            android:name="id"
+            app:argType="long" />
+
+    </fragment>
+
 </navigation>
