@@ -14,27 +14,27 @@ abstract class CoroutineUseCaseAbs<T>(
 
     private var job: Job? = null
 
-    override fun execute(
-        onLoading: () -> Unit,
-        onResult: (T) -> Unit,
-        onError: (Throwable) -> Unit,
-        onFinished: () -> Unit
-    ) {
+    private var onLoading: (() -> Unit)? = null
+    private var onResult: ((T) -> Unit)? = null
+    private var onError: ((Throwable) -> Unit)? = null
+    private var onFinished: (() -> Unit)? = null
+
+    override fun execute() {
         unsubscribe()
 
         job = CoroutineScope(mainDispatcher).launch {
-            onLoading()
+            onLoading?.invoke()
 
             try {
                 val result = withContext(workDispatcher) {
                     executeAsync()
                 }
-                onResult(result)
+                onResult?.invoke(result)
             } catch (exception: Exception) {
-                onError(exception)
+                onError?.invoke(exception)
             }
 
-            onFinished()
+            onFinished?.invoke()
         }
     }
 
@@ -46,5 +46,21 @@ abstract class CoroutineUseCaseAbs<T>(
             cancel()
         }
         job = null
+    }
+
+    override fun onLoading(onLoading: () -> Unit) = apply {
+        this.onLoading = onLoading
+    }
+
+    override fun onResult(onResult: (T) -> Unit) = apply {
+        this.onResult = onResult
+    }
+
+    override fun onError(onError: (Throwable) -> Unit) = apply {
+        this.onError = onError
+    }
+
+    override fun onFinished(onFinished: () -> Unit) = apply {
+        this.onFinished = onFinished
     }
 }

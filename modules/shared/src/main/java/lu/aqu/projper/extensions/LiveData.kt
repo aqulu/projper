@@ -16,17 +16,11 @@ fun <T> CoroutineUseCase<T>.asLiveData() =
     object : MutableLiveData<Resource<T>>() {
 
         override fun onActive() =
-            this@asLiveData.execute(
-                onLoading = {
-                    value = Resource.Loading
-                },
-                onResult = {
-                    value = Resource.Success(it)
-                },
-                onError = {
-                    value = Resource.Error(it)
-                }
-            )
+            this@asLiveData
+                .onLoading { value = Resource.Loading }
+                .onResult { value = Resource.Success(it) }
+                .onError { value = Resource.Error(it) }
+                .execute()
 
         override fun onInactive() =
             this@asLiveData.unsubscribe()
