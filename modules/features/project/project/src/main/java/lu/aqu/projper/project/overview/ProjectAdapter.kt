@@ -1,11 +1,12 @@
 package lu.aqu.projper.project.overview
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
+import lu.aqu.projper.project.BR
+import lu.aqu.projper.project.R
 import lu.aqu.projper.project.databinding.ViewHolderProjectBinding
 import lu.aqu.projper.project.domain.Project
+import lu.aqu.projper.support.DataBindingViewHolder
 import lu.aqu.projper.support.EntityDiffCallback
 
 class ProjectAdapter : ListAdapter<Project, ProjectAdapter.ViewHolder>(EntityDiffCallback()) {
@@ -18,21 +19,11 @@ class ProjectAdapter : ListAdapter<Project, ProjectAdapter.ViewHolder>(EntityDif
         holder.bind(getItem(position))
     }
 
-    class ViewHolder private constructor(
-        private val binding: ViewHolderProjectBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
-
-        constructor(parent: ViewGroup) : this(
-            ViewHolderProjectBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
-
-
-        fun bind(project: Project) {
-            binding.project = project
-        }
-    }
+    class ViewHolder(
+        parent: ViewGroup
+    ) : DataBindingViewHolder<Project, ViewHolderProjectBinding>(
+        parent,
+        R.layout.view_holder_project,
+        BR.project
+    )
 }
