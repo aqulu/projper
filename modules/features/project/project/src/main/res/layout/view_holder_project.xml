@@ -7,6 +7,10 @@
         <variable
             name="project"
             type="lu.aqu.projper.project.domain.Project" />
+
+        <variable
+            name="onClick"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -14,6 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/space_small"
         android:foreground="?android:attr/selectableItemBackground"
+        android:onClick="@{ onClick }"
         android:padding="@dimen/space_medium"
         app:cardCornerRadius="@dimen/cardview_corner_radius">
 

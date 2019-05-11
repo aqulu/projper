@@ -9,10 +9,12 @@ import lu.aqu.projper.project.domain.Project
 import lu.aqu.projper.support.DataBindingViewHolder
 import lu.aqu.projper.support.EntityDiffCallback
 
-class ProjectAdapter : ListAdapter<Project, ProjectAdapter.ViewHolder>(EntityDiffCallback()) {
+class ProjectAdapter(
+    private val onClick: (Project) -> Unit
+) : ListAdapter<Project, ProjectAdapter.ViewHolder>(EntityDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(parent)
+        return ViewHolder(parent, onClick)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -20,10 +22,18 @@ class ProjectAdapter : ListAdapter<Project, ProjectAdapter.ViewHolder>(EntityDif
     }
 
     class ViewHolder(
-        parent: ViewGroup
+        parent: ViewGroup,
+        onClick: (Project) -> Unit
     ) : DataBindingViewHolder<Project, ViewHolderProjectBinding>(
         parent,
         R.layout.view_holder_project,
         BR.project
-    )
+    ) {
+
+        init {
+            binding.setOnClick {
+                binding.project?.run(onClick)
+            }
+        }
+    }
 }
