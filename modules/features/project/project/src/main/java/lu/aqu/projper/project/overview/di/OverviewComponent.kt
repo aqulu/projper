@@ -1,9 +1,9 @@
-package lu.aqu.projper.project.di
+package lu.aqu.projper.project.overview.di
 
 import dagger.Component
 import dagger.android.AndroidInjector
 import lu.aqu.core.di.FragmentScope
-import lu.aqu.projper.project.OverviewFragment
+import lu.aqu.projper.project.overview.OverviewFragment
 import lu.aqu.projper.project.usecase.ProjectUseCaseModule
 
 @Component(

@@ -1,4 +1,4 @@
-package lu.aqu.projper.project
+package lu.aqu.projper.project.overview
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

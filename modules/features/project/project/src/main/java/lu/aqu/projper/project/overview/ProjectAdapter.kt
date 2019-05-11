@@ -1,4 +1,4 @@
-package lu.aqu.projper.project
+package lu.aqu.projper.project.overview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package lu.aqu.projper.project
+package lu.aqu.projper.project.overview
 
 import android.content.Context
 import android.os.Bundle
@@ -12,7 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_overview.projectRecyclerView
 import lu.aqu.core.support.Resource
-import lu.aqu.projper.project.di.DaggerOverviewComponent
+import lu.aqu.projper.project.R
+import lu.aqu.projper.project.overview.di.DaggerOverviewComponent
 import javax.inject.Inject
 
 class OverviewFragment : Fragment() {
