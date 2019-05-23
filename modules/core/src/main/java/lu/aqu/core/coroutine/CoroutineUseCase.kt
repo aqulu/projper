@@ -1,16 +1,18 @@
 package lu.aqu.core.coroutine
 
-interface CoroutineUseCase<T> {
+import kotlinx.coroutines.CoroutineDispatcher
 
-    fun execute()
+typealias CoroutineUseCase<T> = ParametrizedCoroutineUseCase<Unit, T>
 
-    fun unsubscribe()
+fun <T> CoroutineUseCase<T>.execute() = execute(Unit)
 
-    fun onLoading(onLoading: () -> Unit): CoroutineUseCase<T>
+abstract class CoroutineUseCaseAbs<T>(
+    mainDispatcher: CoroutineDispatcher,
+    workDispatcher: CoroutineDispatcher
+) : ParametrizedCoroutineUseCaseAbs<Unit, T>(mainDispatcher, workDispatcher), CoroutineUseCase<T> {
 
-    fun onResult(onResult: (T) -> Unit): CoroutineUseCase<T>
+    override suspend fun executeAsync(paramT: Unit): T =
+        executeAsync()
 
-    fun onError(onError: (Throwable) -> Unit): CoroutineUseCase<T>
-
-    fun onFinished(onFinished: () -> Unit): CoroutineUseCase<T>
+    abstract suspend fun executeAsync(): T
 }

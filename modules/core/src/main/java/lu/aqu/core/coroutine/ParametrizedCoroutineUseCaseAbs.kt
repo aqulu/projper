@@ -1,25 +1,20 @@
 package lu.aqu.core.coroutine
 
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import kotlinx.coroutines.cancelChildren
+import kotlinx.coroutines.*
 
-abstract class CoroutineUseCaseAbs<T>(
+abstract class ParametrizedCoroutineUseCaseAbs<ParamT, ResultT>(
     private val mainDispatcher: CoroutineDispatcher,
     private val workDispatcher: CoroutineDispatcher
-) : CoroutineUseCase<T> {
+) : ParametrizedCoroutineUseCase<ParamT, ResultT> {
 
     private var job: Job? = null
 
     private var onLoading: (() -> Unit)? = null
-    private var onResult: ((T) -> Unit)? = null
+    private var onResult: ((ResultT) -> Unit)? = null
     private var onError: ((Throwable) -> Unit)? = null
     private var onFinished: (() -> Unit)? = null
 
-    override fun execute() {
+    override fun execute(param: ParamT) {
         unsubscribe()
 
         job = CoroutineScope(mainDispatcher).launch {
@@ -27,7 +22,7 @@ abstract class CoroutineUseCaseAbs<T>(
 
             try {
                 val result = withContext(workDispatcher) {
-                    executeAsync()
+                    executeAsync(param)
                 }
                 onResult?.invoke(result)
             } catch (exception: Exception) {
@@ -38,7 +33,7 @@ abstract class CoroutineUseCaseAbs<T>(
         }
     }
 
-    protected abstract suspend fun executeAsync(): T
+    abstract suspend fun executeAsync(paramT: ParamT): ResultT
 
     override fun unsubscribe() {
         job?.run {
@@ -52,7 +47,7 @@ abstract class CoroutineUseCaseAbs<T>(
         this.onLoading = onLoading
     }
 
-    override fun onResult(onResult: (T) -> Unit) = apply {
+    override fun onResult(onResult: (ResultT) -> Unit) = apply {
         this.onResult = onResult
     }
 
