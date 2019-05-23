@@ -6,9 +6,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
+import lu.aqu.core.support.Resource
+import lu.aqu.projper.project.R
 import lu.aqu.projper.project.databinding.FragmentDetailsBinding
 import lu.aqu.projper.project.details.di.DaggerDetailsComponent
 import lu.aqu.projper.project.domain.Project
@@ -45,6 +49,17 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d("Details", "${viewModel.projectId}")
+        viewModel.project.observe(this, Observer {
+            when (it) {
+                is Resource.Success -> {
+                    binding.project = it.data
+                }
+
+                is Resource.Error -> {
+                    Log.w("Details", it.throwable)
+                    Toast.makeText(context, R.string.error_data_fetching, Toast.LENGTH_LONG).show()
+                }
+            }
+        })
     }
 }
