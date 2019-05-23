@@ -1,11 +1,16 @@
 package lu.aqu.core.coroutine
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.cancelChildren
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-abstract class ParametrizedCoroutineUseCaseAbs<ParamT, ResultT>(
+abstract class CoroutineUseCaseWithParameterAbs<ParamT, ResultT>(
     private val mainDispatcher: CoroutineDispatcher,
     private val workDispatcher: CoroutineDispatcher
-) : ParametrizedCoroutineUseCase<ParamT, ResultT> {
+) : CoroutineUseCaseWithParameter<ParamT, ResultT> {
 
     private var job: Job? = null
 
