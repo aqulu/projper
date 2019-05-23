@@ -3,6 +3,8 @@ apply plugin: 'com.android.library'
 apply from: '../../../../gradle/android.config.gradle'
 apply from: '../../../../gradle/android.dependencies.gradle'
 
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
 android {
     dataBinding {
         enabled = true
