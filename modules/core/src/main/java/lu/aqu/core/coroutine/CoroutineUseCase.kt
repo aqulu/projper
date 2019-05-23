@@ -11,7 +11,7 @@ abstract class CoroutineUseCaseAbs<T>(
     workDispatcher: CoroutineDispatcher
 ) : ParametrizedCoroutineUseCaseAbs<Unit, T>(mainDispatcher, workDispatcher), CoroutineUseCase<T> {
 
-    override suspend fun executeAsync(paramT: Unit): T =
+    override suspend fun executeAsync(param: Unit): T =
         executeAsync()
 
     abstract suspend fun executeAsync(): T

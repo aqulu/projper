@@ -33,7 +33,7 @@ abstract class ParametrizedCoroutineUseCaseAbs<ParamT, ResultT>(
         }
     }
 
-    abstract suspend fun executeAsync(paramT: ParamT): ResultT
+    abstract suspend fun executeAsync(param: ParamT): ResultT
 
     override fun unsubscribe() {
         job?.run {
