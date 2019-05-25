@@ -57,10 +57,15 @@ class DetailsFragment : Fragment() {
             }
         }
 
+        val featureAdapter = FeatureAdapter().also {
+            binding.featuresRecyclerView.adapter = it
+        }
+
         viewModel.project.observe(this, Observer {
             when (it) {
                 is Resource.Success -> {
                     binding.project = it.data
+                    featureAdapter.submitList(it.data.features)
                 }
 
                 is Resource.Error -> {

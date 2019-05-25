@@ -40,11 +40,34 @@
                 android:layout_height="wrap_content"
                 android:text="@{ project.description }" />
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_medium" />
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_features" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/featuresRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:isScrollContainer="false"
+                android:orientation="vertical"
+                android:overScrollMode="never"
+                bind:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_medium" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                bind:tags="@{ project.tags }"
-                bind:onTagClick="@{ onTagClickListener }" />
+                bind:onTagClick="@{ onTagClickListener }"
+                bind:tags="@{ project.tags }" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
