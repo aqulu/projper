@@ -16,6 +16,7 @@ import lu.aqu.projper.project.R
 import lu.aqu.projper.project.databinding.FragmentDetailsBinding
 import lu.aqu.projper.project.details.di.DaggerDetailsComponent
 import lu.aqu.projper.project.domain.Project
+import lu.aqu.projper.ui.OnTagClickListener
 import javax.inject.Inject
 
 class DetailsFragment : Fragment() {
@@ -49,10 +50,22 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.onTagClickListener = object : OnTagClickListener {
+            override fun onClick(tag: String) {
+                // TODO search for tag
+                Log.d("Details", "$tag was clicked")
+            }
+        }
+
+        val featureAdapter = FeatureAdapter().also {
+            binding.featuresRecyclerView.adapter = it
+        }
+
         viewModel.project.observe(this, Observer {
             when (it) {
                 is Resource.Success -> {
                     binding.project = it.data
+                    featureAdapter.submitList(it.data.features)
                 }
 
                 is Resource.Error -> {

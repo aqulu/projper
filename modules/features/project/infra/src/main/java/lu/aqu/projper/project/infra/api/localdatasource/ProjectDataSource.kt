@@ -19,15 +19,41 @@ internal object ProjectDataSource : ProjectApiClient {
                 id = 1L,
                 name = "Hello",
                 description = "Hello",
-                features = emptyList(),
-                tags = emptyList()
+                features = listOf(
+                    "say hello to the world",
+                    "be friendly to people"
+                ),
+                tags = listOf("hello", "world", "test", "data")
             ),
             ProjectJson(
                 id = 2L,
                 name = "World!",
                 description = "World!",
-                features = emptyList(),
-                tags = emptyList()
+                features = listOf(
+                    "feature 1",
+                    "feature 2",
+                    "feature 3",
+                    "feature 4"
+                ),
+                tags = listOf(
+                    "Good",
+                    "day",
+                    "to",
+                    "you",
+                    "sir!",
+                    "This",
+                    "is",
+                    "a",
+                    "test",
+                    "for",
+                    "displaying",
+                    "a",
+                    "very",
+                    "long",
+                    "list",
+                    "of",
+                    "tags"
+                )
             )
         )
 }
