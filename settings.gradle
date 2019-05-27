@@ -15,5 +15,6 @@ project(':project-infra').projectDir = new File(projectDir, 'infra')
 project(':project-usecase').projectDir = new File(projectDir, 'usecase')
 
 def authDir = new File(featuresDir, 'auth')
-include ':auth-domain'
+include ':auth-domain', ':auth-infra'
 project(':auth-domain').projectDir = new File(authDir, 'domain')
+project(':auth-infra').projectDir = new File(authDir, 'infra')
