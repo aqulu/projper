@@ -13,3 +13,7 @@ project(':project').projectDir = new File(projectDir, 'project')
 project(':project-domain').projectDir = new File(projectDir, 'domain')
 project(':project-infra').projectDir = new File(projectDir, 'infra')
 project(':project-usecase').projectDir = new File(projectDir, 'usecase')
+
+def authDir = new File(featuresDir, 'auth')
+include ':auth-domain'
+project(':auth-domain').projectDir = new File(authDir, 'domain')
