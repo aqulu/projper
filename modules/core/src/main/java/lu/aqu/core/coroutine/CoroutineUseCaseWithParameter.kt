@@ -2,9 +2,7 @@ package lu.aqu.core.coroutine
 
 interface CoroutineUseCaseWithParameter<ParamT, ResultT> {
 
-    fun execute(param: ParamT)
-
-    fun unsubscribe()
+    suspend fun invoke(param: ParamT)
 
     fun onLoading(onLoading: () -> Unit): CoroutineUseCaseWithParameter<ParamT, ResultT>
 
