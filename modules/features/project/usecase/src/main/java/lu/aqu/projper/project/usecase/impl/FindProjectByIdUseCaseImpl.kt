@@ -13,6 +13,6 @@ internal class FindProjectByIdUseCaseImpl @Inject constructor(
     ioDispatcher: CoroutineDispatcher
 ) : CoroutineUseCaseWithParameterAbs<Project.Id, Project>(mainDispatcher, ioDispatcher), FindProjectByIdUseCase {
 
-    override suspend fun executeAsync(param: Project.Id): Project =
+    override suspend fun doInBackground(param: Project.Id): Project =
         projectRepository.findById(param.value)
 }

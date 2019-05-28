@@ -11,8 +11,8 @@ abstract class CoroutineUseCaseAbs<T>(
     workDispatcher: CoroutineDispatcher
 ) : CoroutineUseCaseWithParameterAbs<Unit, T>(mainDispatcher, workDispatcher), CoroutineUseCase<T> {
 
-    override suspend fun executeAsync(param: Unit): T =
-        executeAsync()
+    override suspend fun doInBackground(param: Unit): T =
+        doInBackground()
 
-    abstract suspend fun executeAsync(): T
+    abstract suspend fun doInBackground(): T
 }

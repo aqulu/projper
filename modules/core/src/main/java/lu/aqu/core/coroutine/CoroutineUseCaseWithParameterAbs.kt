@@ -19,7 +19,7 @@ abstract class CoroutineUseCaseWithParameterAbs<ParamT, ResultT>(
 
             try {
                 val result = withContext(workDispatcher) {
-                    executeAsync(param)
+                    doInBackground(param)
                 }
                 onResult?.invoke(result)
             } catch (exception: Exception) {
@@ -30,7 +30,7 @@ abstract class CoroutineUseCaseWithParameterAbs<ParamT, ResultT>(
         }
     }
 
-    abstract suspend fun executeAsync(param: ParamT): ResultT
+    abstract suspend fun doInBackground(param: ParamT): ResultT
 
     override fun onLoading(onLoading: () -> Unit) = apply {
         this.onLoading = onLoading
