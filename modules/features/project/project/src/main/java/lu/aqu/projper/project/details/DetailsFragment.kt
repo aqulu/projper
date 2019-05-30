@@ -24,7 +24,7 @@ class DetailsFragment : Fragment() {
     private val args: DetailsFragmentArgs by navArgs()
 
     @Inject
-    lateinit var viewModelFactory: DetailsViewModel.Factory
+    lateinit var viewModelFactoryProvider: DetailsViewModelFactory.Provider
     private lateinit var viewModel: DetailsViewModel
 
     private lateinit var binding: FragmentDetailsBinding
@@ -32,13 +32,10 @@ class DetailsFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        DaggerDetailsComponent.builder()
-            .projectId(Project.Id(args.id))
-            .build()
-            .inject(this)
+        DaggerDetailsComponent.create().inject(this)
 
         viewModel = ViewModelProviders
-            .of(this, viewModelFactory)
+            .of(this, viewModelFactoryProvider.provide(Project.Id(args.id)))
             .get(DetailsViewModel::class.java)
     }
 
