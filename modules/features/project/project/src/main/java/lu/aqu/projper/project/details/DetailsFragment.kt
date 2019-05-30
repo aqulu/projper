@@ -12,9 +12,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import lu.aqu.core.support.Resource
+import lu.aqu.projper.di.componentHolder
 import lu.aqu.projper.project.R
 import lu.aqu.projper.project.databinding.FragmentDetailsBinding
-import lu.aqu.projper.project.details.di.DaggerDetailsComponent
+import lu.aqu.projper.project.details.di.DetailsComponent
 import lu.aqu.projper.project.domain.Project
 import lu.aqu.projper.ui.OnTagClickListener
 import javax.inject.Inject
@@ -32,7 +33,7 @@ class DetailsFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        DaggerDetailsComponent.create().inject(this)
+        componentHolder.getComponent(DetailsComponent::class).inject(this)
 
         viewModel = ViewModelProviders
             .of(this, viewModelFactoryProvider.provide(Project.Id(args.id)))

@@ -3,6 +3,7 @@ package lu.aqu.projper.project.details.di
 import dagger.Component
 import dagger.android.AndroidInjector
 import lu.aqu.core.di.FragmentScope
+import lu.aqu.core.di.Injector
 import lu.aqu.projper.project.details.DetailsFragment
 import lu.aqu.projper.project.usecase.ProjectUseCaseModule
 
@@ -10,4 +11,4 @@ import lu.aqu.projper.project.usecase.ProjectUseCaseModule
     modules = [ProjectUseCaseModule::class]
 )
 @FragmentScope
-interface DetailsComponent : AndroidInjector<DetailsFragment>
+interface DetailsComponent : AndroidInjector<DetailsFragment>, Injector
