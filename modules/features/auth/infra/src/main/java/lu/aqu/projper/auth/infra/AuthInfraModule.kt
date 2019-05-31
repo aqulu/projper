@@ -12,7 +12,7 @@ import lu.aqu.projper.auth.infra.prefs.PrefsModule
         PrefsModule::class
     ]
 )
-abstract class InfraModule {
+abstract class AuthInfraModule {
 
     @Binds
     abstract fun bindAuthRepository(impl: AuthRepositoryImpl): AuthRepository

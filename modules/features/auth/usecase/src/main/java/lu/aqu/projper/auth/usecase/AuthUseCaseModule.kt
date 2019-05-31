@@ -4,14 +4,14 @@ import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
 import lu.aqu.projper.auth.domain.AuthRepository
-import lu.aqu.projper.auth.infra.InfraModule
+import lu.aqu.projper.auth.infra.AuthInfraModule
 import lu.aqu.projper.auth.usecase.impl.GetAccessTokenUseCaseImpl
 import lu.aqu.projper.auth.usecase.impl.LoginUseCaseImpl
 
 @Module(
-    includes = [InfraModule::class]
+    includes = [AuthInfraModule::class]
 )
-class UseCaseModule {
+class AuthUseCaseModule {
 
     @Provides
     fun provideLoginUseCase(authRepository: AuthRepository): LoginUseCase =
