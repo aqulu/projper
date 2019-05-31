@@ -1,4 +1,7 @@
-apply from: '../../../../gradle/usecase.build.gradle'
+apply plugin: 'com.android.library'
+
+apply from: '../../../../gradle/android.config.gradle'
+apply from: '../../../../gradle/android.dependencies.gradle'
 
 dependencies {
     implementation project(':auth-infra')
