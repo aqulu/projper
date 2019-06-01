@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/loginDest"
         android:name="lu.aqu.projper.auth.login.LoginFragment"
-        android:label="@string/title_projects_overview"
+        android:label="@string/title_login"
         tools:layout="@layout/fragment_login" />
 
 </navigation>
