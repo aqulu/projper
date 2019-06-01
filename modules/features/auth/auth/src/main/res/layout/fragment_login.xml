@@ -59,5 +59,10 @@
             android:text="@string/label_login"
             bind:isVisible="@{ !isLoading }" />
 
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            bind:isVisible="@{ isLoading }" />
+
     </LinearLayout>
 </layout>
