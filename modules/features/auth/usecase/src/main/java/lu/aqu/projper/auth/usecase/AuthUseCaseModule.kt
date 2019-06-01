@@ -19,5 +19,5 @@ class AuthUseCaseModule {
 
     @Provides
     fun provideGetAccessTokenUseCase(authRepository: AuthRepository): GetAccessTokenUseCase =
-        GetAccessTokenUseCaseImpl(Dispatchers.Main, Dispatchers.Default, authRepository)
+        GetAccessTokenUseCaseImpl(authRepository)
 }
