@@ -1,3 +1,8 @@
 package lu.aqu.projper.auth.domain
 
-interface AuthRepository
+interface AuthRepository {
+
+    fun getAccessToken(): String?
+
+    suspend fun login(email: String, password: String): User
+}
