@@ -16,4 +16,6 @@ dependencies {
     implementation project(':project-usecase')
     implementation project(':project-infra')
     implementation project(':project-domain')
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
 }

@@ -4,13 +4,10 @@ import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
 import lu.aqu.projper.project.domain.ProjectRepository
-import lu.aqu.projper.project.infra.ProjectInfraModule
 import lu.aqu.projper.project.usecase.impl.FindProjectByIdUseCaseImpl
 import lu.aqu.projper.project.usecase.impl.FindProjectsUseCaseImpl
 
-@Module(
-    includes = [ProjectInfraModule::class]
-)
+@Module
 class ProjectUseCaseModule {
 
     @Provides
