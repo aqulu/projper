@@ -13,7 +13,7 @@ app         // android base project, contains MainActivity
 |   |
 |   |-- /auth
 |   |   |-- auth (android-library)          // auth ui layer
-|   |   |-- auth-usecase (android-library)  // auth usecases
+|   |   |-- auth-usecase (java-library)  // auth usecases
 |   |   |-- auth-infra (android-library)    // auth infrastructure layer
 |   |   |-- auth-domain (java-library)      // auth domain layer
 |   |
