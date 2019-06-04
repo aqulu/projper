@@ -5,14 +5,13 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import dagger.Module
 import dagger.Provides
 import lu.aqu.core.util.Constants
-import lu.aqu.projper.auth.hostservice.AccessTokenModule
 import lu.aqu.projper.auth.hostservice.AccessTokenService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-@Module(includes = [AccessTokenModule::class])
+@Module
 internal class ApiModule {
 
     @Provides

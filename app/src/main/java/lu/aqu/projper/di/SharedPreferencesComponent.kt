@@ -4,19 +4,13 @@ import android.app.Application
 import android.content.SharedPreferences
 import dagger.BindsInstance
 import dagger.Component
-import retrofit2.Retrofit
 
 @Component(
-    modules = [
-        ApiModule::class,
-        SharedPreferencesModule::class
-    ]
+    modules = [SharedPreferencesModule::class]
 )
-interface ProjperComponent {
+interface SharedPreferencesComponent {
 
     fun sharedPreferences(): SharedPreferences
-
-    fun retrofit(): Retrofit
 
     @Component.Builder
     interface Builder {
@@ -24,6 +18,6 @@ interface ProjperComponent {
         @BindsInstance
         fun application(application: Application): Builder
 
-        fun build(): ProjperComponent
+        fun build(): SharedPreferencesComponent
     }
 }

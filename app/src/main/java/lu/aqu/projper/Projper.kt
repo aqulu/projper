@@ -3,9 +3,11 @@ package lu.aqu.projper
 import android.app.Application
 import lu.aqu.core.di.ComponentHolder
 import lu.aqu.core.di.Injector
+import lu.aqu.projper.auth.hostservice.DaggerAccessTokenServiceComponent
 import lu.aqu.projper.auth.login.di.DaggerLoginComponent
 import lu.aqu.projper.auth.login.di.LoginComponent
-import lu.aqu.projper.di.DaggerProjperComponent
+import lu.aqu.projper.di.DaggerRetrofitComponent
+import lu.aqu.projper.di.DaggerSharedPreferencesComponent
 import lu.aqu.projper.project.details.di.DaggerDetailsComponent
 import lu.aqu.projper.project.details.di.DetailsComponent
 import lu.aqu.projper.project.overview.di.DaggerOverviewComponent
@@ -19,17 +21,28 @@ class Projper : Application(), ComponentHolder {
     override fun onCreate() {
         super.onCreate()
 
-        val coreComponent = DaggerProjperComponent.builder().application(this).build()
+        val sharedPreferencesComponent = DaggerSharedPreferencesComponent
+            .builder()
+            .application(this)
+            .build()
+
+        val accessTokenServiceComponent = DaggerAccessTokenServiceComponent.builder()
+            .sharedPreferences(sharedPreferencesComponent.sharedPreferences())
+            .build()
+
+        val retrofitComponent = DaggerRetrofitComponent.builder()
+            .accessTokenService(accessTokenServiceComponent.accessTokenService())
+            .build()
 
         components = mapOf(
             OverviewComponent::class to DaggerOverviewComponent.builder()
-                .retrofit(coreComponent.retrofit())
+                .retrofit(retrofitComponent.retrofit())
                 .build(),
             DetailsComponent::class to DaggerDetailsComponent.builder()
-                .retrofit(coreComponent.retrofit())
+                .retrofit(retrofitComponent.retrofit())
                 .build(),
             LoginComponent::class to DaggerLoginComponent.builder()
-                .sharedPreferences(coreComponent.sharedPreferences())
+                .sharedPreferences(sharedPreferencesComponent.sharedPreferences())
                 .build()
         )
     }

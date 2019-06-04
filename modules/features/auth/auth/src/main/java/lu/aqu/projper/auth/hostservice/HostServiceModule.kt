@@ -5,7 +5,7 @@ import dagger.Module
 import lu.aqu.projper.auth.AuthModule
 
 @Module(includes = [AuthModule::class])
-abstract class AccessTokenModule {
+internal abstract class HostServiceModule {
 
     @Binds
     internal abstract fun bindAccessTokenService(impl: AccessTokenServiceImpl): AccessTokenService
