@@ -14,9 +14,9 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_overview.projectRecyclerView
 import lu.aqu.core.support.Resource
 import lu.aqu.projper.di.componentHolder
+import lu.aqu.projper.project.ProjectComponent
 import lu.aqu.projper.project.R
 import lu.aqu.projper.project.details.DetailsFragmentArgs
-import lu.aqu.projper.project.overview.di.OverviewComponent
 import javax.inject.Inject
 
 class OverviewFragment : Fragment() {
@@ -29,7 +29,7 @@ class OverviewFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        componentHolder.getComponent(OverviewComponent::class).inject(this)
+        componentHolder.getComponent(ProjectComponent::class).inject(this)
 
         viewModel = ViewModelProviders
             .of(this, viewModelFactory)

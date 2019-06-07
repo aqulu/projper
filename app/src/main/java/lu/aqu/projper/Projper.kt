@@ -8,10 +8,8 @@ import lu.aqu.projper.auth.login.di.DaggerLoginComponent
 import lu.aqu.projper.auth.login.di.LoginComponent
 import lu.aqu.projper.di.DaggerRetrofitComponent
 import lu.aqu.projper.di.DaggerSharedPreferencesComponent
-import lu.aqu.projper.project.details.di.DaggerDetailsComponent
-import lu.aqu.projper.project.details.di.DetailsComponent
-import lu.aqu.projper.project.overview.di.DaggerOverviewComponent
-import lu.aqu.projper.project.overview.di.OverviewComponent
+import lu.aqu.projper.project.DaggerProjectComponent
+import lu.aqu.projper.project.ProjectComponent
 import kotlin.reflect.KClass
 
 class Projper : Application(), ComponentHolder {
@@ -35,10 +33,7 @@ class Projper : Application(), ComponentHolder {
             .build()
 
         components = mapOf(
-            OverviewComponent::class to DaggerOverviewComponent.builder()
-                .retrofit(retrofitComponent.retrofit())
-                .build(),
-            DetailsComponent::class to DaggerDetailsComponent.builder()
+            ProjectComponent::class to DaggerProjectComponent.builder()
                 .retrofit(retrofitComponent.retrofit())
                 .build(),
             LoginComponent::class to DaggerLoginComponent.builder()
