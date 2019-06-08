@@ -13,7 +13,7 @@ internal object ProjectDataSource : ProjectApiClient {
     override fun findByIdAsync(id: Long): Deferred<ProjectJson> =
         CompletableDeferred(projects.first { it.id == id })
 
-    private val projects =
+    internal val projects =
         listOf(
             ProjectJson(
                 id = 1L,
