@@ -1,14 +1,14 @@
 package lu.aqu.projper.project.infra
 
-import lu.aqu.projper.project.domain.BookmarksRepository
+import lu.aqu.projper.project.domain.BookmarkRepository
 import lu.aqu.projper.project.domain.Project
 import lu.aqu.projper.project.infra.api.BookmarksApiClient
 import lu.aqu.projper.project.infra.api.json.AddBookmarkQueryJson
 import javax.inject.Inject
 
-internal class BookmarksRepositoryImpl @Inject constructor(
+internal class BookmarkRepositoryImpl @Inject constructor(
     private val bookmarksApiClient: BookmarksApiClient
-) : BookmarksRepository {
+) : BookmarkRepository {
 
     override suspend fun findAll(): List<Project> =
         bookmarksApiClient.findAllAsync()

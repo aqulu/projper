@@ -3,7 +3,7 @@ package lu.aqu.projper.project.usecase
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
-import lu.aqu.projper.project.domain.BookmarksRepository
+import lu.aqu.projper.project.domain.BookmarkRepository
 import lu.aqu.projper.project.domain.ProjectRepository
 import lu.aqu.projper.project.usecase.impl.FindProjectByIdUseCaseImpl
 import lu.aqu.projper.project.usecase.impl.FindProjectsUseCaseImpl
@@ -29,9 +29,9 @@ class ProjectUseCaseModule {
         )
 
     @Provides
-    internal fun provideGetBookmarksUseCase(bookmarksRepository: BookmarksRepository): GetBookmarksUseCase =
+    internal fun provideGetBookmarksUseCase(bookmarkRepository: BookmarkRepository): GetBookmarksUseCase =
         GetBookmarksUseCaseImpl(
-            bookmarksRepository,
+            bookmarkRepository,
             Dispatchers.Main,
             Dispatchers.IO
         )

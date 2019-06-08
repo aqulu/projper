@@ -1,6 +1,6 @@
 package lu.aqu.projper.project.domain
 
-interface BookmarksRepository {
+interface BookmarkRepository {
 
     /**
      * find all bookmarks for the currently logged in user
