@@ -16,6 +16,7 @@ import lu.aqu.core.support.Resource
 import lu.aqu.projper.di.componentHolder
 import lu.aqu.projper.project.ProjectComponent
 import lu.aqu.projper.project.R
+import lu.aqu.projper.project.common.ProjectAdapter
 import lu.aqu.projper.project.details.DetailsFragmentArgs
 import javax.inject.Inject
 
