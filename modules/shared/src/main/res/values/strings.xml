@@ -1,6 +1,7 @@
 <resources>
     <string name="title_projects_overview">Projects</string>
     <string name="title_details_overview">Project Details</string>
+    <string name="title_bookmarks">Bookmarked Projects</string>
     <string name="title_login">Login</string>
     <string name="error_data_fetching">an error occurred while fetching data</string>
 
