@@ -18,6 +18,7 @@ import lu.aqu.projper.project.ProjectComponent
 import lu.aqu.projper.project.R
 import lu.aqu.projper.project.common.ProjectAdapter
 import lu.aqu.projper.project.details.DetailsFragmentArgs
+import retrofit2.HttpException
 import javax.inject.Inject
 
 class BookmarksFragment : Fragment() {
@@ -47,6 +48,7 @@ class BookmarksFragment : Fragment() {
         }
         bookmarksRecyclerView.adapter = adapter
 
+        viewModel.load()
         viewModel.bookmarks.observe(this, Observer {
             when (it) {
                 is Resource.Success -> {
@@ -54,10 +56,22 @@ class BookmarksFragment : Fragment() {
                 }
 
                 is Resource.Error -> {
-                    Log.w("Bookmarks", it.throwable)
-                    Toast.makeText(context, R.string.error_data_fetching, Toast.LENGTH_LONG).show()
+                    onError(it.throwable)
                 }
             }
         })
+    }
+
+    private fun onError(throwable: Throwable) {
+        when (throwable) {
+            is HttpException -> {
+                // TODO check if http exception is 403
+                findNavController().navigate(R.id.loginDest)
+            }
+            else -> {
+                Log.w("Bookmarks", throwable)
+                Toast.makeText(context, R.string.error_data_fetching, Toast.LENGTH_LONG).show()
+            }
+        }
     }
 }
