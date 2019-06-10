@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/project_nav_graph"
-    app:startDestination="@id/overviewDest"
-    tools:ignore="UnusedNavigation">
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/overviewDest">
 
     <fragment
         android:id="@+id/overviewDest"
         android:name="lu.aqu.projper.project.overview.OverviewFragment"
-        android:label="@string/title_projects_overview"
-        tools:layout="@layout/fragment_overview" />
+        android:label="@string/title_projects_overview" />
 
     <fragment
         android:id="@+id/detailsDest"
         android:name="lu.aqu.projper.project.details.DetailsFragment"
-        android:label="{title}"
-        tools:layout="@layout/fragment_details">
+        android:label="{title}">
 
         <argument
             android:name="title"
@@ -28,5 +24,15 @@
             app:argType="long" />
 
     </fragment>
+
+    <fragment
+        android:id="@+id/bookmarksDest"
+        android:name="lu.aqu.projper.project.bookmarks.BookmarksFragment"
+        android:label="@string/title_bookmarks" />
+
+    <fragment
+        android:id="@+id/loginDest"
+        android:name="lu.aqu.projper.auth.login.LoginFragment"
+        android:label="@string/title_login" />
 
 </navigation>

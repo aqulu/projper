@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import lu.aqu.core.support.Resource
 import lu.aqu.projper.auth.R
@@ -23,15 +23,11 @@ class LoginFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: LoginViewModel.Factory
-    private lateinit var viewModel: LoginViewModel
+    private val viewModel: LoginViewModel by viewModels { viewModelFactory }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         componentHolder.getComponent(LoginComponent::class).inject(this)
-
-        viewModel = ViewModelProviders
-            .of(this, viewModelFactory)
-            .get(LoginViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =

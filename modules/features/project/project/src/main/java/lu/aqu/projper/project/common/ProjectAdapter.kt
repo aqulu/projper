@@ -1,4 +1,4 @@
-package lu.aqu.projper.project.overview
+package lu.aqu.projper.project.common
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
