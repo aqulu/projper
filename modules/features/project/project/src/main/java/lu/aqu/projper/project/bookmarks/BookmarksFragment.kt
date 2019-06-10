@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_bookmarks.bookmarksRecyclerView
 import lu.aqu.core.support.Resource
@@ -25,16 +25,11 @@ class BookmarksFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: BookmarkViewModel.Factory
 
-    private lateinit var viewModel: BookmarkViewModel
+    private val viewModel: BookmarkViewModel by viewModels { viewModelFactory }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
         componentHolder.getComponent(ProjectComponent::class).inject(this)
-
-        viewModel = ViewModelProviders
-            .of(this, viewModelFactory)
-            .get(BookmarkViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
