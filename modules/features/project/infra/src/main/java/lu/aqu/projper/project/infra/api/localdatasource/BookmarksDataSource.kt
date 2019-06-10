@@ -2,22 +2,20 @@ package lu.aqu.projper.project.infra.api.localdatasource
 
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred
-import lu.aqu.core.util.Constants
 import lu.aqu.projper.project.infra.api.BookmarksApiClient
 import lu.aqu.projper.project.infra.api.json.AddBookmarkQueryJson
 import lu.aqu.projper.project.infra.api.json.ProjectJson
-import okhttp3.Request
 import okhttp3.ResponseBody
 import retrofit2.HttpException
 import retrofit2.Response
-import retrofit2.Retrofit
 
 /**
  * mock booksmarks datasource
  */
-internal class BookmarksDataSource(
-    private val retrofit: Retrofit
-) : BookmarksApiClient {
+internal class BookmarksDataSource : BookmarksApiClient {
+
+    @Volatile
+    private var requestCount = 0
 
     override fun findAllAsync(): Deferred<List<ProjectJson>> {
         if (!isLoggedIn()) {
@@ -50,10 +48,14 @@ internal class BookmarksDataSource(
         )
     }
 
-    private fun isLoggedIn() =
-        !retrofit.callFactory()
-            .newCall(Request.Builder().url("https://ddg.gg/").build())
-            .request()
-            .header(Constants.Api.AUTH_HEADER)
-            .isNullOrEmpty()
+    /**
+     * returns false for the first request and true after
+     */
+    private fun isLoggedIn(): Boolean =
+        (requestCount > 0)
+            .also {
+                synchronized(this) {
+                    requestCount++
+                }
+            }
 }

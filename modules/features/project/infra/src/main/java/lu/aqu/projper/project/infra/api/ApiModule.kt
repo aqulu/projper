@@ -15,5 +15,5 @@ internal class ApiModule {
 
     @Provides
     fun provideBookmarksApiClient(retrofit: Retrofit): BookmarksApiClient =
-        BookmarksDataSource(retrofit)
+        BookmarksDataSource()
 }
