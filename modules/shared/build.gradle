@@ -2,6 +2,8 @@ apply plugin: 'com.android.library'
 
 apply from: '../../gradle/android.config.gradle'
 
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
 android {
     dataBinding {
         enabled = true
@@ -18,5 +20,7 @@ dependencies {
     implementation project(':core')
 
     implementation "androidx.lifecycle:lifecycle-livedata-core-ktx:$lifecycle_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation "com.google.android.material:material:$material_version"
 }

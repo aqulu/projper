@@ -4,8 +4,6 @@ apply from: '../gradle/android.config.gradle'
 apply from: '../gradle/android.dependencies.gradle'
 apply from: '../gradle/ui.dependencies.gradle'
 
-apply plugin: "androidx.navigation.safeargs.kotlin"
-
 android {
     defaultConfig {
         applicationId "lu.aqu.projper"
