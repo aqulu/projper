@@ -11,7 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.bottomNavigation
 import lu.aqu.core.util.Constants.AUTH_VIEW_MODEL
 import lu.aqu.projper.R
-import lu.aqu.projper.auth.login.LoginComponent
+import lu.aqu.projper.auth.AuthComponent
 import lu.aqu.projper.di.componentHolder
 
 class MainActivity : AppCompatActivity() {
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val viewModelFactory = componentHolder
-            .getComponent(LoginComponent::class)
+            .getComponent(AuthComponent::class)
             .loginViewModelFactory()
 
         // instantiate AuthViewModel for reuse within fragments
