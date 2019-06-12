@@ -3,9 +3,8 @@ package lu.aqu.projper
 import android.app.Application
 import lu.aqu.core.di.ComponentHolder
 import lu.aqu.core.di.Injector
-import lu.aqu.projper.auth.hostservice.DaggerAccessTokenServiceComponent
-import lu.aqu.projper.auth.login.di.DaggerLoginComponent
-import lu.aqu.projper.auth.login.di.LoginComponent
+import lu.aqu.projper.auth.AuthComponent
+import lu.aqu.projper.auth.DaggerAuthComponent
 import lu.aqu.projper.di.DaggerRetrofitComponent
 import lu.aqu.projper.di.DaggerSharedPreferencesComponent
 import lu.aqu.projper.project.DaggerProjectComponent
@@ -24,20 +23,18 @@ class Projper : Application(), ComponentHolder {
             .application(this)
             .build()
 
-        val accessTokenServiceComponent = DaggerAccessTokenServiceComponent.builder()
+        val authComponent = DaggerAuthComponent.builder()
             .sharedPreferences(sharedPreferencesComponent.sharedPreferences())
             .build()
 
         val retrofitComponent = DaggerRetrofitComponent.builder()
-            .accessTokenService(accessTokenServiceComponent.accessTokenService())
+            .accessTokenService(authComponent.accessTokenService())
             .build()
 
         components = mapOf(
+            AuthComponent::class to authComponent,
             ProjectComponent::class to DaggerProjectComponent.builder()
                 .retrofit(retrofitComponent.retrofit())
-                .build(),
-            LoginComponent::class to DaggerLoginComponent.builder()
-                .sharedPreferences(sharedPreferencesComponent.sharedPreferences())
                 .build()
         )
     }

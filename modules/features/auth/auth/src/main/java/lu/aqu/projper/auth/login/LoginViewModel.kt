@@ -7,19 +7,31 @@ import lu.aqu.core.support.Resource
 import lu.aqu.projper.auth.domain.User
 import lu.aqu.projper.auth.usecase.LoginQuery
 import lu.aqu.projper.auth.usecase.LoginUseCase
+import lu.aqu.projper.ui.AuthViewModel
 import javax.inject.Inject
 
 class LoginViewModel private constructor(
     loginUseCase: LoginUseCase
-) : ViewModel() {
+) : AuthViewModel() {
+
+    override val authenticationState = MutableLiveData<AuthenticationState>(AuthenticationState.UNAUTHENTICATED)
 
     /**
      * login usecase chain emitting results to [mutableLoginResult]
      */
     private val loginAction = loginUseCase
-        .onLoading { mutableLoginResult.value = Resource.Loading }
-        .onError { mutableLoginResult.value = Resource.Error(it) }
-        .onResult { mutableLoginResult.value = Resource.Success(it) }
+        .onLoading {
+            authenticationState.value = AuthenticationState.UNAUTHENTICATED
+            mutableLoginResult.value = Resource.Loading
+        }
+        .onError {
+            authenticationState.value = AuthenticationState.UNAUTHENTICATED
+            mutableLoginResult.value = Resource.Error(it)
+        }
+        .onResult {
+            authenticationState.value = AuthenticationState.AUTHENTICATED
+            mutableLoginResult.value = Resource.Success(it)
+        }
 
     /**
      * concurrency helper to avoid multiple login at once
