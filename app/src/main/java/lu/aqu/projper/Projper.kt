@@ -5,7 +5,7 @@ import lu.aqu.core.di.ComponentHolder
 import lu.aqu.core.di.Injector
 import lu.aqu.projper.auth.hostservice.DaggerAccessTokenServiceComponent
 import lu.aqu.projper.auth.login.di.DaggerLoginComponent
-import lu.aqu.projper.auth.login.di.LoginComponent
+import lu.aqu.projper.auth.login.LoginComponent
 import lu.aqu.projper.di.DaggerRetrofitComponent
 import lu.aqu.projper.di.DaggerSharedPreferencesComponent
 import lu.aqu.projper.project.DaggerProjectComponent

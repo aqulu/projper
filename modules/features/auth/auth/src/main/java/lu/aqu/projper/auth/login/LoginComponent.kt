@@ -1,17 +1,17 @@
-package lu.aqu.projper.auth.login.di
+package lu.aqu.projper.auth.login
 
 import android.content.SharedPreferences
 import dagger.BindsInstance
 import dagger.Component
-import dagger.android.AndroidInjector
 import lu.aqu.core.di.FragmentScope
 import lu.aqu.core.di.Injector
 import lu.aqu.projper.auth.AuthModule
-import lu.aqu.projper.auth.login.LoginFragment
 
 @Component(modules = [AuthModule::class])
 @FragmentScope
-interface LoginComponent : AndroidInjector<LoginFragment>, Injector {
+interface LoginComponent : Injector {
+
+    fun loginViewModelFactory(): LoginViewModel.Factory
 
     @Component.Builder
     interface Builder {
