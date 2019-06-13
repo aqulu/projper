@@ -27,6 +27,9 @@ abstract class DataBindingViewHolder<DataT, BindingT : ViewDataBinding> private 
         variableId
     )
 
+    /**
+     * binds the supplied value to the ViewDataBinding's variable with id [variableId]
+     */
     fun bind(value: DataT) {
         binding.setVariable(variableId, value)
     }

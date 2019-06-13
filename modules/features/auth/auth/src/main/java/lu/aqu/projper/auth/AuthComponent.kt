@@ -3,7 +3,6 @@ package lu.aqu.projper.auth
 import android.content.SharedPreferences
 import dagger.BindsInstance
 import dagger.Component
-import lu.aqu.core.di.Injector
 import lu.aqu.projper.auth.hostservice.AccessTokenService
 import lu.aqu.projper.auth.hostservice.HostServiceModule
 import lu.aqu.projper.auth.login.LoginViewModel
@@ -14,7 +13,7 @@ import lu.aqu.projper.auth.login.LoginViewModel
         AuthModule::class
     ]
 )
-interface AuthComponent : Injector {
+interface AuthComponent : lu.aqu.core.di.Component {
 
     fun loginViewModelFactory(): LoginViewModel.Factory
 

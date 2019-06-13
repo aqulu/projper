@@ -14,10 +14,11 @@ class LoginViewModel private constructor(
     loginUseCase: LoginUseCase
 ) : AuthViewModel() {
 
-    override val authenticationState = MutableLiveData<AuthenticationState>(AuthenticationState.UNAUTHENTICATED)
+    override val authenticationState =
+        MutableLiveData<AuthenticationState>(AuthenticationState.UNAUTHENTICATED)
 
     /**
-     * login usecase chain emitting results to [mutableLoginResult]
+     * login usecase chain emitting results to [mutableLoginResult] and updating [authenticationState] accordingly
      */
     private val loginAction = loginUseCase
         .onLoading {

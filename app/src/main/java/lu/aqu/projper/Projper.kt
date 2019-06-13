@@ -2,7 +2,7 @@ package lu.aqu.projper
 
 import android.app.Application
 import lu.aqu.core.di.ComponentHolder
-import lu.aqu.core.di.Injector
+import lu.aqu.core.di.Component
 import lu.aqu.projper.auth.AuthComponent
 import lu.aqu.projper.auth.DaggerAuthComponent
 import lu.aqu.projper.di.DaggerRetrofitComponent
@@ -13,7 +13,7 @@ import kotlin.reflect.KClass
 
 class Projper : Application(), ComponentHolder {
 
-    private lateinit var components: Map<KClass<*>, Injector>
+    private lateinit var components: Map<KClass<*>, Component>
 
     override fun onCreate() {
         super.onCreate()
@@ -40,6 +40,6 @@ class Projper : Application(), ComponentHolder {
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : Injector> getComponent(componentClass: KClass<T>): T =
+    override fun <T : Component> getComponent(componentClass: KClass<T>): T =
         components[componentClass] as T
 }

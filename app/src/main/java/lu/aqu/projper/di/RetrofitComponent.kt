@@ -10,6 +10,9 @@ import retrofit2.Retrofit
 )
 interface RetrofitComponent {
 
+    /**
+     * provides a retrofit instance with an authentication interceptor
+     */
     fun retrofit(): Retrofit
 
     @Component.Builder

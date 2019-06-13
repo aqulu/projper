@@ -6,6 +6,9 @@ typealias CoroutineUseCase<T> = CoroutineUseCaseWithParameter<Unit, T>
 
 suspend fun <T> CoroutineUseCase<T>.invoke() = invoke(Unit)
 
+/**
+ * adaption of [CoroutineUseCaseWithParameterAbs] for parameter-less Coroutine UseCases
+ */
 abstract class CoroutineUseCaseAbs<T>(
     mainDispatcher: CoroutineDispatcher,
     workDispatcher: CoroutineDispatcher

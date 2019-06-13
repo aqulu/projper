@@ -3,8 +3,17 @@ package lu.aqu.core.coroutine
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
+/**
+ * [CoroutineUseCase] interface implementation
+ */
 abstract class CoroutineUseCaseWithParameterAbs<ParamT, ResultT>(
+    /**
+     * [CoroutineDispatcher] to invoke callbacks on
+     */
     private val mainDispatcher: CoroutineDispatcher,
+    /**
+     * [CoroutineDispatcher] to handle background processing
+     */
     private val workDispatcher: CoroutineDispatcher
 ) : CoroutineUseCaseWithParameter<ParamT, ResultT> {
 
