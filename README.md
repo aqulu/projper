@@ -26,3 +26,7 @@ app         // android base project, contains MainActivity
 |-- shared  // shared resources and classes (android-library)
 
 ```
+
+A reference multi-module architecture can be found here: https://github.com/kgmyshin/annict-android
+
+Compared this, projper tries to avoid cross-module dependencies by injecting with feature-module independent interfaces into the respective Components. Modules are created as java-libraries whereever the use of android-libraries could be avoided.
