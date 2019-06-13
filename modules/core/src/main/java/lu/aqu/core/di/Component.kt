@@ -1,3 +1,6 @@
 package lu.aqu.core.di
 
-interface Injector
+/**
+ * helper interface to lookup dagger Components in [ComponentHolder]
+ */
+interface Component
