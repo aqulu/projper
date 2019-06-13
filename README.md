@@ -27,6 +27,6 @@ app         // android base project, contains MainActivity
 
 ```
 
-A reference multi-module architecture can be found here: https://github.com/kgmyshin/annict-android
+A reference multi-module project can be found here: https://github.com/kgmyshin/annict-android
 
-Compared this, projper tries to avoid cross-module dependencies by injecting with feature-module independent interfaces into the respective Components. Modules are created as java-libraries whereever the use of android-libraries could be avoided.
+Compared to this, projper tries to avoid cross-module dependencies by injecting feature-module independent interfaces into the respective Components. Modules are created as java-libraries whereever the use of android-libraries can be avoided. Also, projper makes use of Android Architecture Components and therefore follows an MVVM rather than an MVP architecture.
