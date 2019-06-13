@@ -4,7 +4,7 @@ interface BookmarkRepository {
 
     /**
      * find all bookmarks for the currently logged in user
-     * @return list of bookmarks
+     * @return list of bookmarked project
      */
     suspend fun findAll(): List<Project>
 

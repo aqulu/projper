@@ -28,6 +28,10 @@ class BookmarksFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: BookmarkViewModel.Factory
     private val viewModel: BookmarkViewModel by viewModels { viewModelFactory }
+
+    /**
+     * ViewModel holding shared authentication state
+     */
     private val authViewModel: AuthViewModel by lazy {
         ViewModelProviders
             .of(requireActivity())
