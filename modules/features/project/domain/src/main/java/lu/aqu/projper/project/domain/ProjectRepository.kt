@@ -9,7 +9,7 @@ interface ProjectRepository {
 
     /**
      * @return project
-     * @throws Exception if no project could be found for the supplied id
+     * @throws NoSuchElementException if no project could be found for the supplied id
      */
     suspend fun findById(id: Long): Project
 }
