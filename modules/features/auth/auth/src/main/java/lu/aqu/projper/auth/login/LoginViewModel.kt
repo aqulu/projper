@@ -10,7 +10,7 @@ import lu.aqu.projper.auth.usecase.LoginUseCase
 import lu.aqu.projper.ui.AuthViewModel
 import javax.inject.Inject
 
-class LoginViewModel private constructor(
+class LoginViewModel internal constructor(
     loginUseCase: LoginUseCase
 ) : AuthViewModel() {
 
@@ -40,7 +40,7 @@ class LoginViewModel private constructor(
     private val controlledRunner = ControlledRunner<Unit>()
 
     private val mutableLoginResult = MutableLiveData<Resource<User>>()
-    val loginResult = mutableLoginResult
+    val loginResult: LiveData<Resource<User>> = mutableLoginResult
 
     fun login(email: String, password: String): LiveData<Resource<User>> {
         viewModelScope.launch {
