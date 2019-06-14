@@ -3,6 +3,7 @@ package lu.aqu.projper.project.infra
 import lu.aqu.projper.project.domain.Project
 import lu.aqu.projper.project.domain.ProjectRepository
 import lu.aqu.projper.project.infra.api.ProjectApiClient
+import retrofit2.HttpException
 import javax.inject.Inject
 
 internal class ProjectRepositoryImpl @Inject constructor(
@@ -16,8 +17,15 @@ internal class ProjectRepositoryImpl @Inject constructor(
             .map(ProjectConverter::toModel)
 
     override suspend fun findById(id: Long): Project =
-        projectApiClient
-            .findByIdAsync(id)
-            .await()
-            .let(ProjectConverter::toModel)
+        try {
+            projectApiClient
+                .findByIdAsync(id)
+                .await()
+                .let(ProjectConverter::toModel)
+        } catch (e: HttpException) {
+            when (e.code()) {
+                404 -> throw NoSuchElementException("project with id $id not found")
+                else -> throw e
+            }
+        }
 }

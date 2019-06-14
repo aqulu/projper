@@ -1,7 +1,8 @@
 dependencies {
 
-    // Android architecture components
     implementation "androidx.core:core-ktx:$ktx_version"
+
+    // Android architecture components
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
@@ -12,4 +13,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
     implementation "com.google.android.material:material:$material_version"
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
+
+    // test
+    testImplementation "androidx.arch.core:core-testing:$arch_version"
 }

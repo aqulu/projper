@@ -22,4 +22,6 @@ dependencies {
     // test
     testImplementation "junit:junit:$junit_version"
     testImplementation "androidx.test:runner:$test_version"
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlin_coroutines_version"
 }
